@@ -8,18 +8,26 @@ const TOWER_SCENE := preload("res://scenes/tower.tscn")
 var towers: Array[Area2D] = []
 var selected_tower: int = -1
 
-# Hardcoded tower positions in tile coordinates
-var tower_positions: Array[Vector2i] = [
-	Vector2i(-3, 4),
-	Vector2i(3, 6),
-	Vector2i(-1, 7),
-	Vector2i(1,1),
-]
+#var tower_positions: Array[Vector2i] = [
+	#Vector2i(0, 0),
+	#Vector2i(0, 1),
+	#Vector2i(0, 0),
+	#Vector2i(0, 0),
+	#Vector2i(5, 5),
+#]
+var tower_positions: Array[Vector2i] = []
 
 func _ready() -> void:
-	print("level _ready running")
+	for x in 10:
+		for y in 10:
+			tower_positions.append(Vector2i(x, y))
 	drawer.ability_chosen.connect(_on_ability_chosen)
 	_spawn_towers()
+
+#func _ready() -> void:
+	#print("level _ready running")
+	#drawer.ability_chosen.connect(_on_ability_chosen)
+	#_spawn_towers()
 
 func _spawn_towers() -> void:
 	for i in tower_positions.size():

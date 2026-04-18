@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://d0h7726xfwl3s"]
+
+[ext_resource type="Script" uid="uid://cowme1fj71li4" path="res://menus/level_select.gd" id="1_x5a0v"]
+
+[node name="LevelSelect" type="Control" unique_id=782599961]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x5a0v")
+
+[node name="Center" type="CenterContainer" parent="." unique_id=791564552]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Center" unique_id=90286550]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Center/Buttons" unique_id=1929930816]
+layout_mode = 2
+text = "Select Level"
+
+[node name="Level01Button" type="Button" parent="Center/Buttons" unique_id=1107222438]
+layout_mode = 2
+text = "Level 1"
+
+[node name="BackButton" type="Button" parent="Center/Buttons" unique_id=1967255478]
+layout_mode = 2
+text = "Back"
