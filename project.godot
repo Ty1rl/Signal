@@ -15,6 +15,10 @@ run/main_scene="uid://myoaumll50fl"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[dotnet]
+
+project/assembly_name="Signal"
+
 [file_customization]
 
 folder_colors={
