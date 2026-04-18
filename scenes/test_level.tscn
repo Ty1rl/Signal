@@ -1,0 +1,25 @@
+[gd_scene format=4 uid="uid://btp7inee50k1p"]
+
+[ext_resource type="TileSet" uid="uid://b0ciiar6k1gua" path="res://assets/prototype/isometric_tile_set.tres" id="1_2venv"]
+[ext_resource type="Script" uid="uid://duexh3xap7t0w" path="res://scenes/test_level.gd" id="1_j6w7d"]
+[ext_resource type="Script" uid="uid://d1vhl1h1lt3yl" path="res://scenes/camera_2d.gd" id="1_paw1w"]
+[ext_resource type="PackedScene" uid="uid://kl80axy6e7bh" path="res://game/drawer.tscn" id="4_x4b8f"]
+
+[node name="TestLevel" type="Node2D" unique_id=196843778]
+script = ExtResource("1_j6w7d")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2101443626]
+position = Vector2(400, 98)
+script = ExtResource("1_paw1w")
+
+[node name="BackgroundTileMapLayer" type="TileMapLayer" parent="." unique_id=232634099]
+tile_map_data = PackedByteArray("AAAAAAEAFQAIAAAAAAAAAAIAFQAIAAAAAAAAAAMAFQAIAAAAAAABAAQAFQAIAAAAAAABAAMAFQAIAAAAAAABAAIAFQAIAAAAAAABAAAAFQAIAAAAAAABAAEAFQAIAAAAAAACAAIAFQAIAAAAAAD//wEAMgAbAAAAAAAAAAAAMgAbAAAAAAAAAP//MgAbAAAAAAABAP//MgAZAAAAAAACAAAAMgAZAAAAAAACAAEAMgAZAAAAAAA=")
+tile_set = ExtResource("1_2venv")
+
+[node name="GameplayTileMapLayer" type="TileMapLayer" parent="." unique_id=1066411183]
+tile_map_data = PackedByteArray("AAABAAQACAAGAAAAAAACAAIACAAEAAAAAAABAAAACAAFAAAAAAA=")
+tile_set = ExtResource("1_2venv")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1945189351]
+
+[node name="Drawer" parent="UI" unique_id=1209388097 instance=ExtResource("4_x4b8f")]
