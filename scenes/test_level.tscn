@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://btp7inee50k1p"]
 
 [ext_resource type="TileSet" uid="uid://b0ciiar6k1gua" path="res://assets/prototype/isometric_tile_set.tres" id="1_2venv"]
+[ext_resource type="PackedScene" uid="uid://1vjlhq3ccuy0" path="res://towers/tower_example.tscn" id="2_paw1w"]
 
 [node name="TestLevel" type="Node2D" unique_id=196843778]
 
@@ -14,3 +15,6 @@ tile_set = ExtResource("1_2venv")
 [node name="GameplayTileMapLayer" type="TileMapLayer" parent="." unique_id=1066411183]
 tile_map_data = PackedByteArray("AAABAAQACAAGAAAAAAACAAIACAAEAAAAAAABAAAACAAFAAAAAAA=")
 tile_set = ExtResource("1_2venv")
+
+[node name="TowerExample" parent="." unique_id=2061166232 instance=ExtResource("2_paw1w")]
+position = Vector2(262, 170)
