@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://gj4t7rphok1f"]
 
 [ext_resource type="Script" uid="uid://bri28wjcmm8p" path="res://menus/title_menu.gd" id="1_k5v1s"]
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://UI/theme.tres" id="1_nf5x0"]
 
 [node name="TitleMenu" type="CenterContainer" unique_id=83036211]
 anchors_preset = 15
@@ -8,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_nf5x0")
 script = ExtResource("1_k5v1s")
 
 [node name="TitleVBox" type="VBoxContainer" parent="." unique_id=1268044217]
@@ -15,6 +17,7 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="TitleVBox" unique_id=1975157882]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.90051556, 0.43495622, 0.24097028, 1)
 theme_override_font_sizes/font_size = 48
 text = "Signal"
 horizontal_alignment = 1

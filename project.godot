@@ -15,12 +15,6 @@ run/main_scene="uid://myoaumll50fl"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[file_customization]
-
-folder_colors={
-"res://menus/": "green"
-}
-
 [physics]
 
 3d/physics_engine="Jolt Physics"
