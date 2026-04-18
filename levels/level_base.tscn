@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dj3f7m5j5l8hw"]
+
+[ext_resource type="Script" uid="uid://cnrlbd5tlx3b" path="res://levels/level_base.gd" id="1_da5si"]
+[ext_resource type="Script" uid="uid://d1vhl1h1lt3yl" path="res://scenes/camera_2d.gd" id="2_ep22m"]
+[ext_resource type="TileSet" uid="uid://b0ciiar6k1gua" path="res://assets/prototype/isometric_tile_set.tres" id="3_ts4ud"]
+[ext_resource type="Script" uid="uid://bvcqmw84luhvx" path="res://scenes/glow_overlay.gd" id="4_ep22m"]
+[ext_resource type="PackedScene" uid="uid://dh1sknka87ugd" path="res://scenes/drawer.tscn" id="4_jd1fy"]
+
+[node name="LevelBase" type="Node2D" unique_id=196843778]
+script = ExtResource("1_da5si")
+metadata/_edit_horizontal_guides_ = [816.0]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2101443626]
+position = Vector2(400, 98)
+script = ExtResource("2_ep22m")
+
+[node name="BackgroundTileMapLayer" type="TileMapLayer" parent="." unique_id=232634099]
+y_sort_enabled = true
+tile_set = ExtResource("3_ts4ud")
+
+[node name="GlowOverlay" type="Node2D" parent="." unique_id=1620992632]
+script = ExtResource("4_ep22m")
+
+[node name="GameplayTileMapLayer" type="TileMapLayer" parent="." unique_id=1066411183]
+y_sort_enabled = true
+tile_set = ExtResource("3_ts4ud")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1766201632]
+
+[node name="Drawer" parent="UI" unique_id=1755069698 instance=ExtResource("4_jd1fy")]
+offset_right = 128.0
+offset_bottom = 60.0
+metadata/_edit_use_anchors_ = true
+
+[node name="QuitButton" type="Button" parent="UI" unique_id=69145608]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -86.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Quit Level"
+
+[node name="QuitConfirm" type="ConfirmationDialog" parent="UI" unique_id=16154603]
+ok_button_text = "Confirm Quit Level"
+cancel_button_text = "Keep Playing Level"

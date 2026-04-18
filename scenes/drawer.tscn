@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dh1sknka87ugd"]
+
+[ext_resource type="Script" uid="uid://c8pmw723fgr4x" path="res://scenes/drawer.gd" id="1_lvudm"]
+
+[node name="Drawer" type="PanelContainer" unique_id=1755069698]
+custom_minimum_size = Vector2(0, 60)
+script = ExtResource("1_lvudm")
+
+[node name="Buttons" type="HBoxContainer" parent="." unique_id=829215665]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FooButton" type="Button" parent="Buttons" unique_id=572750426]
+layout_mode = 2
+text = "Foo"
+
+[node name="BarButton" type="Button" parent="Buttons" unique_id=1404980422]
+layout_mode = 2
+text = "Bar"
+
+[node name="BazButton" type="Button" parent="Buttons" unique_id=809890007]
+layout_mode = 2
+text = "Baz"
