@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://gj4t7rphok1f"]
+
+[ext_resource type="Script" uid="uid://bri28wjcmm8p" path="res://menus/title_menu.gd" id="1_k5v1s"]
+
+[node name="TitleMenu" type="CenterContainer" unique_id=83036211]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k5v1s")
+
+[node name="TitleVBox" type="VBoxContainer" parent="." unique_id=1268044217]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="TitleVBox" unique_id=1975157882]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Signal"
+horizontal_alignment = 1
+
+[node name="BottonVBox" type="VBoxContainer" parent="TitleVBox" unique_id=578063431]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PlayButton" type="Button" parent="TitleVBox/BottonVBox" unique_id=253064106]
+layout_mode = 2
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="TitleVBox/BottonVBox" unique_id=75098943]
+layout_mode = 2
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="TitleVBox/BottonVBox" unique_id=2132524671]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="TitleVBox/BottonVBox/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="TitleVBox/BottonVBox/ExitButton" to="." method="_on_exit_button_pressed"]
