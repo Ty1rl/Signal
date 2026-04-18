@@ -1,0 +1,16 @@
+[gd_scene format=4 uid="uid://btp7inee50k1p"]
+
+[ext_resource type="TileSet" uid="uid://b0ciiar6k1gua" path="res://assets/prototype/isometric_tile_set.tres" id="1_2venv"]
+
+[node name="TestLevel" type="Node2D" unique_id=196843778]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2101443626]
+position = Vector2(400, 98)
+
+[node name="BackgroundTileMapLayer" type="TileMapLayer" parent="." unique_id=232634099]
+tile_map_data = PackedByteArray("AAAAAAEAFQAIAAAAAAAAAAIAFQAIAAAAAAAAAAMAFQAIAAAAAAABAAQAFQAIAAAAAAABAAMAFQAIAAAAAAABAAIAFQAIAAAAAAABAAAAFQAIAAAAAAABAAEAFQAIAAAAAAACAAIAFQAIAAAAAAD//wEAMgAbAAAAAAAAAAAAMgAbAAAAAAAAAP//MgAbAAAAAAABAP//MgAZAAAAAAACAAAAMgAZAAAAAAACAAEAMgAZAAAAAAA=")
+tile_set = ExtResource("1_2venv")
+
+[node name="GameplayTileMapLayer" type="TileMapLayer" parent="." unique_id=1066411183]
+tile_map_data = PackedByteArray("AAABAAQACAAGAAAAAAACAAIACAAEAAAAAAABAAAACAAFAAAAAAA=")
+tile_set = ExtResource("1_2venv")
