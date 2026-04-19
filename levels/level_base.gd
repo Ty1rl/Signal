@@ -9,11 +9,13 @@ const SHAPES: Dictionary = {
 	"Pulse": {"range": 5, "cost": 15, "passes": ["plain"]},
 	"Skip":  {"range": 2, "cost": 25, "passes": ["plain", "forest", "wall"]},
 }
+
 const SHAPE_COLORS: Dictionary = {
-	"Wide":  Color(0.3, 0.9, 0.4, 0.4),   # green
-	"Pulse": Color(0.3, 0.6, 1.0, 0.4),   # blue
-	"Skip":  Color(1.0, 0.5, 0.2, 0.4),   # orange
+	"Wide":  Color(0.3, 0.9, 0.4, 0.4),
+	"Pulse": Color(0.3, 0.6, 1.0, 0.4),
+	"Skip":  Color(1.0, 0.5, 0.2, 0.4),
 }
+
 @onready var terrain_grid_node: Node2D = $TerrainGrid
 @onready var drawer: PanelContainer = $UI/Drawer
 @onready var quit_button: Button = $UI/QuitButton
@@ -21,27 +23,26 @@ const SHAPE_COLORS: Dictionary = {
 @onready var integrity_label: Label = $UI/IntegrityLabel
 @onready var win_dialog: ConfirmationDialog = $UI/WinDialog
 
-# Game state
+var win_shown: bool = false
+
 var starting_integrity: int = 100
 var current_integrity: int = 100
-var controlled_tiles: Dictionary = {}   # Vector2i -> true
-var transmitter_shape: Dictionary = {}  # tile_coord -> shape_name
-var controlled_tile_shapes: Dictionary = {}  # Vector2i -> Array[String] of shapes that reach
-# Level data — levels populate these before calling super._ready()
+var controlled_tiles: Dictionary = {}
+var controlled_tile_shapes: Dictionary = {}  # Vector2i -> Array[String]
+var transmitter_shape: Dictionary = {}
+
 var grid_w: int = 15
 var grid_h: int = 15
 var tower_positions: Array[Vector2i] = []
 var source_index: int = -1
 var target_index: int = -1
 
-# Runtime
-var terrain_grid: Dictionary = {}  # Vector2i -> Tile
-var tower_coords: Array[Vector2i] = []  # ordered list of tiles that have towers
+var terrain_grid: Dictionary = {}
+var tower_coords: Array[Vector2i] = []
 var source_coord: Vector2i = Vector2i(-1, -1)
 var target_coord: Vector2i = Vector2i(-1, -1)
-var transmitters: Dictionary = {}       # tile_coord -> true
+var transmitters: Dictionary = {}
 var selected_coord: Vector2i = Vector2i(-1, -1)
-
 
 func _ready() -> void:
 	drawer.ability_chosen.connect(_on_ability_chosen)
@@ -55,15 +56,11 @@ func _ready() -> void:
 	_refresh_all_tiles()
 	_update_integrity_label()
 
-# --- Coordinate conversion (diamond down iso) ---
 func tile_to_local(tile: Vector2i) -> Vector2:
 	var hw: float = TILE_SIZE.x * 0.5
 	var hh: float = TILE_SIZE.y * 0.5
 	return Vector2((tile.x - tile.y) * hw, (tile.x + tile.y) * hh)
 
-# --- Build the grid ---
-# Levels that know their grid dimensions should populate terrain in their own 
-# _paint_tiles_from_data() after super._ready().
 func _build_grid() -> void:
 	for x in grid_w:
 		for y in grid_h:
@@ -71,10 +68,6 @@ func _build_grid() -> void:
 			var tile: Tile = TILE_SCENE.instantiate()
 			tile.tile_coord = coord
 			tile.position = tile_to_local(coord)
-			# tile.z_index = coord.x + coord.y 
-			# tile.priority = coord.x + coord.y 
-			# tile.priority = -(coord.x + coord.y)
-			tile.clicked.connect(_on_tile_clicked)
 			terrain_grid_node.add_child(tile)
 			terrain_grid[coord] = tile
 
@@ -96,7 +89,6 @@ func _apply_tower_roles() -> void:
 		else:
 			tile.set_tower_role(Tile.TowerRole.NORMAL)
 
-# --- Terrain lookup ---
 func _tile_terrain(tile: Vector2i) -> String:
 	if not terrain_grid.has(tile):
 		return "plain"
@@ -106,16 +98,13 @@ func _tile_terrain(tile: Vector2i) -> String:
 		Tile.Terrain.WALL:   return "wall"
 		_:                    return "plain"
 
-# --- Control propagation ---
 func _recompute_control() -> void:
 	controlled_tiles.clear()
 	controlled_tile_shapes.clear()
 	
-	# Source tile is always controlled
 	if source_coord != Vector2i(-1, -1):
 		controlled_tiles[source_coord] = true
 	
-	# Iterative flood from each transmitter
 	var changed := true
 	while changed:
 		changed = false
@@ -158,7 +147,6 @@ func _flood_from(origin: Vector2i, shape_name: String) -> void:
 				visited[nb] = d + 1
 				queue.append(nb)
 
-# --- Visual refresh ---
 func _refresh_all_tiles() -> void:
 	for coord in terrain_grid.keys():
 		var tile: Tile = terrain_grid[coord]
@@ -170,15 +158,13 @@ func _refresh_all_tiles() -> void:
 				colors.append(SHAPE_COLORS.get(s, Color(0.3, 0.8, 1.0, 0.4)))
 			tile.set_highlight_colors(colors)
 			tile.add_state(Tile.State.REACHABLE)
-		# if transmitters.has(coord):
-		# 	tile.add_state(Tile.State.BROADCASTING)
-		if coord == selected_coord:
-			tile.add_state(Tile.State.SELECTED)
 		if transmitters.has(coord):
 			tile.set_tower_shape(transmitter_shape.get(coord, ""))
 			tile.add_state(Tile.State.BROADCASTING)
 		else:
-			tile.set_tower_shape("")			
+			tile.set_tower_shape("")
+		if coord == selected_coord:
+			tile.add_state(Tile.State.SELECTED)
 
 func _update_integrity_label() -> void:
 	integrity_label.text = "Integrity: %d" % current_integrity
@@ -187,7 +173,6 @@ func _update_integrity_label() -> void:
 	else:
 		integrity_label.remove_theme_color_override("font_color")
 
-# --- Interaction ---
 func _on_tile_clicked(coord: Vector2i) -> void:
 	if not terrain_grid.has(coord):
 		return
@@ -201,6 +186,9 @@ func _on_tile_clicked(coord: Vector2i) -> void:
 		terrain_grid[selected_coord].remove_state(Tile.State.SELECTED)
 	selected_coord = coord
 	tile.add_state(Tile.State.SELECTED)
+	
+	drawer.set_current_shape(transmitter_shape.get(coord, ""))
+	drawer.set_integrity(current_integrity)
 	drawer.show()
 
 func _on_ability_chosen(ability: String) -> void:
@@ -209,39 +197,87 @@ func _on_ability_chosen(ability: String) -> void:
 	if not controlled_tiles.has(selected_coord):
 		return
 	
-	var shape_cost: int = SHAPES[ability]["cost"]
-	
-	if transmitters.has(selected_coord) and transmitter_shape.get(selected_coord) == ability:
-		# Toggle off
-		transmitters.erase(selected_coord)
-		transmitter_shape.erase(selected_coord)
-		current_integrity += shape_cost
-	elif transmitters.has(selected_coord):
-		# Swap shape
-		var old_shape: String = transmitter_shape.get(selected_coord, "")
-		if old_shape != "":
-			current_integrity += SHAPES[old_shape]["cost"]
-		transmitter_shape[selected_coord] = ability
-		current_integrity -= shape_cost
+	if ability == "Off":
+		if transmitters.has(selected_coord):
+			var old: String = transmitter_shape.get(selected_coord, "")
+			if old != "":
+				current_integrity += SHAPES[old]["cost"]
+			transmitters.erase(selected_coord)
+			transmitter_shape.erase(selected_coord)
 	else:
-		# Activate
-		transmitters[selected_coord] = true
-		transmitter_shape[selected_coord] = ability
-		current_integrity -= shape_cost
+		var shape_cost: int = SHAPES[ability]["cost"]
+		if transmitters.has(selected_coord):
+			var old_shape: String = transmitter_shape.get(selected_coord, "")
+			if old_shape != "":
+				current_integrity += SHAPES[old_shape]["cost"]
+			transmitter_shape[selected_coord] = ability
+			current_integrity -= shape_cost
+		else:
+			transmitters[selected_coord] = true
+			transmitter_shape[selected_coord] = ability
+			current_integrity -= shape_cost
 	
 	_recompute_control()
 	_refresh_all_tiles()
 	_update_integrity_label()
+	
+	drawer.set_current_shape(transmitter_shape.get(selected_coord, ""))
+	drawer.set_integrity(current_integrity)
+	
 	_check_win()
 
+#func _on_ability_chosen(ability: String) -> void:
+	#if selected_coord == Vector2i(-1, -1):
+		#return
+	#if not controlled_tiles.has(selected_coord):
+		#return
+#
+	#if ability == "Off":
+		#if transmitters.has(selected_coord):
+			#var old: String = transmitter_shape.get(selected_coord, "")
+			#if old != "":
+				#current_integrity += SHAPES[old]["cost"]
+			#transmitters.erase(selected_coord)
+			#transmitter_shape.erase(selected_coord)
+			#_recompute_control()
+			#_refresh_all_tiles()
+			#_update_integrity_label()
+			#_check_win()
+		#return
+		#
+	#var shape_cost: int = SHAPES[ability]["cost"]
+	#
+	#if transmitters.has(selected_coord) and transmitter_shape.get(selected_coord) == ability:
+		#transmitters.erase(selected_coord)
+		#transmitter_shape.erase(selected_coord)
+		#current_integrity += shape_cost
+	#elif transmitters.has(selected_coord):
+		#var old_shape: String = transmitter_shape.get(selected_coord, "")
+		#if old_shape != "":
+			#current_integrity += SHAPES[old_shape]["cost"]
+		#transmitter_shape[selected_coord] = ability
+		#current_integrity -= shape_cost
+	#else:
+		#transmitters[selected_coord] = true
+		#transmitter_shape[selected_coord] = ability
+		#current_integrity -= shape_cost
+	#
+	#_recompute_control()
+	#_refresh_all_tiles()
+	#_update_integrity_label()
+	#_check_win()
+
 func _check_win() -> void:
+	if win_shown:
+		return
 	if target_coord == Vector2i(-1, -1):
 		return
 	if not controlled_tiles.has(target_coord):
 		return
 	if current_integrity < 0:
 		return
-	win_dialog.dialog_text = "You connected the signal.\nIntegrity remaining: %d" % current_integrity
+	win_shown = true
+	win_dialog.dialog_text = "Signal   Integrity   remaining:   %d\n\n" % current_integrity
 	win_dialog.popup_centered()
 
 func _on_win_confirmed() -> void:
@@ -259,7 +295,7 @@ func _process(_delta: float) -> void:
 		drawer.hide()
 		return
 	drawer.show()
-	drawer.position = screen_pos + Vector2(30, -80)
+	drawer.position = screen_pos + Vector2(-drawer.size.x * 0.5, -drawer.size.y - 160)
 	drawer.position.x = clamp(drawer.position.x, 10, viewport_size.x - drawer.size.x - 10)
 	drawer.position.y = clamp(drawer.position.y, 10, viewport_size.y - drawer.size.y - 10)
 
@@ -268,13 +304,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if drawer.visible and drawer.get_global_rect().has_point(event.position):
 			return
 		
-		# Manual pick: find the frontmost tile whose collision contains the click
 		var picked := _pick_tile_at(event.position)
+		print("CLICK at ", event.position, " picked=", picked)
 		if picked != Vector2i(-1, -1):
 			_on_tile_clicked(picked)
 			return
 		
-		# Clicked empty space — deselect
 		if selected_coord != Vector2i(-1, -1) and terrain_grid.has(selected_coord):
 			terrain_grid[selected_coord].remove_state(Tile.State.SELECTED)
 			selected_coord = Vector2i(-1, -1)
@@ -282,22 +317,36 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _pick_tile_at(screen_pos: Vector2) -> Vector2i:
 	var best_coord := Vector2i(-1, -1)
-	var best_depth := -1
+	var best_depth: int = -1
 	for coord in terrain_grid.keys():
 		var tile: Tile = terrain_grid[coord]
-		# Only tiles with a reachable tower can be clicked
 		if tile.tower_role == Tile.TowerRole.NONE:
 			continue
 		if not tile.has_state(Tile.State.REACHABLE):
 			continue
-		# Convert screen pos to tile local and test against collision rect
-		var local := tile.get_global_transform_with_canvas().affine_inverse() * screen_pos
-		var shape: RectangleShape2D = tile.collision.shape
-		var half := shape.size * 0.5
-		var col_center := tile.collision.position
-		var rect := Rect2(col_center - half, shape.size)
-		if not rect.has_point(local):
+		
+		var polys: Array = tile.active_collisions()
+		if polys.is_empty():
 			continue
+		
+		var local: Vector2 = tile.get_global_transform_with_canvas().affine_inverse() * screen_pos
+		
+		var hit: bool = false
+		for p in polys:
+			var poly: CollisionPolygon2D = p
+			var offset: Vector2 = poly.position
+			var shifted: PackedVector2Array = PackedVector2Array()
+			for pt in poly.polygon:
+				shifted.append(pt + offset)
+			if shifted.size() < 3:
+				continue
+			if Geometry2D.is_point_in_polygon(local, shifted):
+				hit = true
+				break
+		
+		if not hit:
+			continue
+		
 		var depth: int = coord.x + coord.y
 		if depth > best_depth:
 			best_depth = depth

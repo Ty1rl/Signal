@@ -66,19 +66,19 @@ offset_left = -86.0
 offset_bottom = 31.0
 grow_horizontal = 0
 theme = ExtResource("4_theme")
-text = "Quit Level"
+text = "Quit   Level"
 
 [node name="QuitConfirm" type="ConfirmationDialog" parent="UI" unique_id=1182014736]
 theme = ExtResource("4_theme")
-ok_button_text = "Confirm Quit Level"
-cancel_button_text = "Keep Playing Level"
+ok_button_text = "Confirm   Quit   Level"
+cancel_button_text = "Keep   Playing   Level"
 
 [node name="WinDialog" type="ConfirmationDialog" parent="UI" unique_id=1816151530]
-title = "Target Reached"
+title = "Signal   Successfully   Transmitted"
 theme = ExtResource("4_theme")
-ok_button_text = "Return to Level Selection"
+ok_button_text = "Return   to   Level   Selection"
 dialog_text = "Integrity remaining: xxx"
-cancel_button_text = "Keep Playing"
+cancel_button_text = "Keep   Playing"
 
 [node name="IntegrityLabel" type="Label" parent="UI" unique_id=1152228]
 offset_left = 20.0

@@ -54,6 +54,7 @@ texture = SubResource("AtlasTexture_highlight")
 offset = Vector2(0, -24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1620584781]
+visible = false
 position = Vector2(0, -27.5)
 shape = SubResource("RectangleShape2D_tile")
 

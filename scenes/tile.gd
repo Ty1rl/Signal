@@ -23,7 +23,13 @@ enum State {
 
 @onready var terrain_sprite: Sprite2D = $TerrainSprite
 @onready var highlights: Array[Sprite2D] = [$Highlight0, $Highlight1, $Highlight2]
-@onready var collision: CollisionShape2D = $CollisionShape2D
+
+# Terrain + tower collision polygons. Any may be null if partner hasn't drawn it yet.
+@onready var _col_plain: CollisionPolygon2D = get_node_or_null("CollisionPlain")
+@onready var _col_wall: CollisionPolygon2D = get_node_or_null("CollisionWall")
+@onready var _col_forest: CollisionPolygon2D = get_node_or_null("CollisionForest")
+@onready var _col_tower_off: CollisionPolygon2D = get_node_or_null("CollisionTowerOff")
+@onready var _col_tower_on: CollisionPolygon2D = get_node_or_null("CollisionTowerOn")
 
 var tile_coord: Vector2i = Vector2i.ZERO
 var terrain: int = Terrain.PLAIN
@@ -72,6 +78,7 @@ func clear_transient_states() -> void:
 func _refresh_visual() -> void:
 	_update_terrain_sprite()
 	_update_highlight()
+	_update_collision()
 
 func _update_terrain_sprite() -> void:
 	var region: Rect2 = _pick_region()
@@ -95,7 +102,6 @@ func _pick_region() -> Rect2:
 			Terrain.WALL:   return tower_on_wall_region
 			_:               return tower_on_plain_region
 	
-	# Tower off (controlled, uncontrolled, source, target — the "state" differences show via modulate)
 	match terrain:
 		Terrain.FOREST: return tower_off_forest_region
 		Terrain.WALL:   return tower_off_wall_region
@@ -104,7 +110,6 @@ func _pick_region() -> Rect2:
 func _compute_tint() -> Color:
 	if tower_role == TowerRole.NONE:
 		return Color.WHITE
-	
 	if has_state(State.SELECTED):
 		return Color(1.8, 1.8, 0.6)
 	if tower_role == TowerRole.TARGET and not has_state(State.REACHABLE):
@@ -131,3 +136,30 @@ func _update_highlight() -> void:
 			highlights[i].modulate = highlight_colors[i]
 		else:
 			highlights[i].visible = false
+
+# --- Collision ---
+# Enables one terrain polygon + optionally one tower polygon based on state.
+func _update_collision() -> void:
+	# Terrain layer
+	_set_poly_enabled(_col_plain, terrain == Terrain.PLAIN)
+	_set_poly_enabled(_col_wall, terrain == Terrain.WALL)
+	_set_poly_enabled(_col_forest, terrain == Terrain.FOREST)
+	
+	# Tower layer
+	var has_tower: bool = tower_role != TowerRole.NONE
+	var broadcasting: bool = has_state(State.BROADCASTING)
+	_set_poly_enabled(_col_tower_off, has_tower and not broadcasting)
+	_set_poly_enabled(_col_tower_on, has_tower and broadcasting)
+
+func _set_poly_enabled(poly: CollisionPolygon2D, should_enable: bool) -> void:
+	if poly == null:
+		return
+	poly.disabled = not should_enable
+
+# Returns list of currently-active CollisionPolygon2Ds (terrain + optionally tower)
+func active_collisions() -> Array:
+	var result: Array = []
+	for p in [_col_plain, _col_wall, _col_forest, _col_tower_off, _col_tower_on]:
+		if p != null and not p.disabled:
+			result.append(p)
+	return result
