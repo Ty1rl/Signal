@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coxf0efv00okg"
-path="res://.godot/imported/floor_half.png-cb12c23e4cb61d2cc3221a6d11389df4.ctex"
+uid="uid://blmtkrdnnde06"
+path="res://.godot/imported/tower.png-0bb1858ba43019819c6f1681ee9b335e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/floor_half.png"
-dest_files=["res://.godot/imported/floor_half.png-cb12c23e4cb61d2cc3221a6d11389df4.ctex"]
+source_file="res://assets/tiles/tower.png"
+dest_files=["res://.godot/imported/tower.png-0bb1858ba43019819c6f1681ee9b335e.ctex"]
 
 [params]
 
