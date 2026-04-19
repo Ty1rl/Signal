@@ -13,7 +13,7 @@ func _draw() -> void:
 		return
 	for tile in tiles_to_draw:
 		var c: Vector2 = tile_origin_local.call(tile) + Vector2(0, tile_size.y * 0.5)
-		c.y -= 64
+		c.y -= 8
 		var w := tile_size.x * 0.5
 		var h := tile_size.y * 0.5
 		var diamond := PackedVector2Array([

@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://dfjf68yxjlvxj"]
 
-[ext_resource type="PackedScene" uid="uid://dj3f7m5j5l8hw" path="res://levels/level_base.tscn" id="1_3reu6"]
-[ext_resource type="Script" uid="uid://dfuauuvmuxuqt" path="res://levels/level_generated.gd" id="2_fdh6k"]
+[ext_resource type="PackedScene" uid="uid://dj3f7m5j5l8hw" path="res://levels/level_base.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://dfuauuvmuxuqt" path="res://levels/level_generated.gd" id="2_gen"]
 
-[node name="LevelBase" unique_id=196843778 instance=ExtResource("1_3reu6")]
-y_sort_enabled = false
-script = ExtResource("2_fdh6k")
+[node name="LevelGenerated" unique_id=588495320 instance=ExtResource("1_base")]
+script = ExtResource("2_gen")
