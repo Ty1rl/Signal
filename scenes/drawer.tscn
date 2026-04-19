@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dh1sknka87ugd"]
 
-[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://UI/theme.tres" id="1_k0f1d"]
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://ui/theme.tres" id="1_k0f1d"]
 [ext_resource type="Script" uid="uid://c8pmw723fgr4x" path="res://scenes/drawer.gd" id="1_lvudm"]
 
 [node name="Drawer" type="PanelContainer" unique_id=1755069698]

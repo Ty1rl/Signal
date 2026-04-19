@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dj3f7m5j5l8hw"]
 
 [ext_resource type="Script" uid="uid://cnrlbd5tlx3b" path="res://levels/level_base.gd" id="1_da5si"]
-[ext_resource type="Script" uid="uid://d1vhl1h1lt3yl" path="res://scenes/camera_2d.gd" id="2_ep22m"]
+[ext_resource type="Script" uid="uid://d1vhl1h1lt3yl" path="res://scripts/camera_2d.gd" id="2_ep22m"]
 [ext_resource type="TileSet" uid="uid://b0ciiar6k1gua" path="res://assets/prototype/isometric_tile_set.tres" id="3_ts4ud"]
-[ext_resource type="Script" uid="uid://bvcqmw84luhvx" path="res://scenes/glow_overlay.gd" id="4_ep22m"]
+[ext_resource type="Script" uid="uid://bvcqmw84luhvx" path="res://scripts/glow_overlay.gd" id="4_ep22m"]
 [ext_resource type="PackedScene" uid="uid://dh1sknka87ugd" path="res://scenes/drawer.tscn" id="4_jd1fy"]
-[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://UI/theme.tres" id="6_ts4ud"]
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://ui/theme.tres" id="6_ts4ud"]
 
 [node name="LevelBase" type="Node2D" unique_id=196843778]
 script = ExtResource("1_da5si")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://gj4t7rphok1f"]
 
 [ext_resource type="Script" uid="uid://bri28wjcmm8p" path="res://menus/title_menu.gd" id="1_k5v1s"]
-[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://UI/theme.tres" id="1_nf5x0"]
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://ui/theme.tres" id="1_nf5x0"]
 
 [node name="TitleMenu" type="CenterContainer" unique_id=83036211]
 anchors_preset = 15
