@@ -23,6 +23,8 @@ const SHAPE_COLORS: Dictionary = {
 @onready var integrity_label: Label = $UI/IntegrityLabel
 @onready var win_dialog: ConfirmationDialog = $UI/WinDialog
 
+var win_shown: bool = false
+
 var starting_integrity: int = 100
 var current_integrity: int = 100
 var controlled_tiles: Dictionary = {}
@@ -184,6 +186,9 @@ func _on_tile_clicked(coord: Vector2i) -> void:
 		terrain_grid[selected_coord].remove_state(Tile.State.SELECTED)
 	selected_coord = coord
 	tile.add_state(Tile.State.SELECTED)
+	
+	drawer.set_current_shape(transmitter_shape.get(coord, ""))
+	drawer.set_integrity(current_integrity)
 	drawer.show()
 
 func _on_ability_chosen(ability: String) -> void:
@@ -191,7 +196,7 @@ func _on_ability_chosen(ability: String) -> void:
 		return
 	if not controlled_tiles.has(selected_coord):
 		return
-
+	
 	if ability == "Off":
 		if transmitters.has(selected_coord):
 			var old: String = transmitter_shape.get(selected_coord, "")
@@ -199,42 +204,80 @@ func _on_ability_chosen(ability: String) -> void:
 				current_integrity += SHAPES[old]["cost"]
 			transmitters.erase(selected_coord)
 			transmitter_shape.erase(selected_coord)
-			_recompute_control()
-			_refresh_all_tiles()
-			_update_integrity_label()
-			_check_win()
-		return
-		
-	var shape_cost: int = SHAPES[ability]["cost"]
-	
-	if transmitters.has(selected_coord) and transmitter_shape.get(selected_coord) == ability:
-		transmitters.erase(selected_coord)
-		transmitter_shape.erase(selected_coord)
-		current_integrity += shape_cost
-	elif transmitters.has(selected_coord):
-		var old_shape: String = transmitter_shape.get(selected_coord, "")
-		if old_shape != "":
-			current_integrity += SHAPES[old_shape]["cost"]
-		transmitter_shape[selected_coord] = ability
-		current_integrity -= shape_cost
 	else:
-		transmitters[selected_coord] = true
-		transmitter_shape[selected_coord] = ability
-		current_integrity -= shape_cost
+		var shape_cost: int = SHAPES[ability]["cost"]
+		if transmitters.has(selected_coord):
+			var old_shape: String = transmitter_shape.get(selected_coord, "")
+			if old_shape != "":
+				current_integrity += SHAPES[old_shape]["cost"]
+			transmitter_shape[selected_coord] = ability
+			current_integrity -= shape_cost
+		else:
+			transmitters[selected_coord] = true
+			transmitter_shape[selected_coord] = ability
+			current_integrity -= shape_cost
 	
 	_recompute_control()
 	_refresh_all_tiles()
 	_update_integrity_label()
+	
+	drawer.set_current_shape(transmitter_shape.get(selected_coord, ""))
+	drawer.set_integrity(current_integrity)
+	
 	_check_win()
 
+#func _on_ability_chosen(ability: String) -> void:
+	#if selected_coord == Vector2i(-1, -1):
+		#return
+	#if not controlled_tiles.has(selected_coord):
+		#return
+#
+	#if ability == "Off":
+		#if transmitters.has(selected_coord):
+			#var old: String = transmitter_shape.get(selected_coord, "")
+			#if old != "":
+				#current_integrity += SHAPES[old]["cost"]
+			#transmitters.erase(selected_coord)
+			#transmitter_shape.erase(selected_coord)
+			#_recompute_control()
+			#_refresh_all_tiles()
+			#_update_integrity_label()
+			#_check_win()
+		#return
+		#
+	#var shape_cost: int = SHAPES[ability]["cost"]
+	#
+	#if transmitters.has(selected_coord) and transmitter_shape.get(selected_coord) == ability:
+		#transmitters.erase(selected_coord)
+		#transmitter_shape.erase(selected_coord)
+		#current_integrity += shape_cost
+	#elif transmitters.has(selected_coord):
+		#var old_shape: String = transmitter_shape.get(selected_coord, "")
+		#if old_shape != "":
+			#current_integrity += SHAPES[old_shape]["cost"]
+		#transmitter_shape[selected_coord] = ability
+		#current_integrity -= shape_cost
+	#else:
+		#transmitters[selected_coord] = true
+		#transmitter_shape[selected_coord] = ability
+		#current_integrity -= shape_cost
+	#
+	#_recompute_control()
+	#_refresh_all_tiles()
+	#_update_integrity_label()
+	#_check_win()
+
 func _check_win() -> void:
+	if win_shown:
+		return
 	if target_coord == Vector2i(-1, -1):
 		return
 	if not controlled_tiles.has(target_coord):
 		return
 	if current_integrity < 0:
 		return
-	win_dialog.dialog_text = "You connected the signal.\nIntegrity remaining: %d" % current_integrity
+	win_shown = true
+	win_dialog.dialog_text = "Signal   Integrity   remaining:   %d\n\n" % current_integrity
 	win_dialog.popup_centered()
 
 func _on_win_confirmed() -> void:
@@ -252,7 +295,7 @@ func _process(_delta: float) -> void:
 		drawer.hide()
 		return
 	drawer.show()
-	drawer.position = screen_pos + Vector2(30, -80)
+	drawer.position = screen_pos + Vector2(-drawer.size.x * 0.5, -drawer.size.y - 160)
 	drawer.position.x = clamp(drawer.position.x, 10, viewport_size.x - drawer.size.x - 10)
 	drawer.position.y = clamp(drawer.position.y, 10, viewport_size.y - drawer.size.y - 10)
 

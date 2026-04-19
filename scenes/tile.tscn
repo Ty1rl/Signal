@@ -3,6 +3,16 @@
 [ext_resource type="Script" uid="uid://ikfgg5cd1f8o" path="res://scenes/tile.gd" id="1_tile"]
 [ext_resource type="Texture2D" uid="uid://d3i7rlvxhfln4" path="res://assets/tiles/tiles.png" id="2_tiles"]
 [ext_resource type="Texture2D" uid="uid://blmtkrdnnde06" path="res://assets/tiles/tower.png" id="3_jy7pm"]
+[ext_resource type="Texture2D" uid="uid://c3gkgi0upd7gc" path="res://assets/tiles/floor.png" id="3_vknvr"]
+[ext_resource type="Texture2D" uid="uid://buvd2kru8ydwi" path="res://assets/tiles/rocks_large.png" id="4_jdkp0"]
+[ext_resource type="Texture2D" uid="uid://sls7gmjm2yre" path="res://assets/tiles/rocks_small.png" id="5_q8xw3"]
+[ext_resource type="Texture2D" uid="uid://b7d7c0ili350u" path="res://assets/tiles/tower_off.png" id="7_lkxpj"]
+[ext_resource type="Texture2D" uid="uid://8mse3ev4p4mr" path="res://assets/tiles/tower_off_rocks_large.png" id="8_lf0mp"]
+[ext_resource type="Texture2D" uid="uid://c5u05ko42axdp" path="res://assets/tiles/tower_off_rocks_small.png" id="9_ufjw7"]
+[ext_resource type="Texture2D" uid="uid://umowmxtanug1" path="res://assets/tiles/tower_rocks_large.png" id="10_3ngql"]
+[ext_resource type="Texture2D" uid="uid://cq3lb4sa0tc6n" path="res://assets/tiles/tower_rocks_small.png" id="11_gqnqq"]
+[ext_resource type="Texture2D" uid="uid://beacf8v2lhnww" path="res://assets/tiles/wall.png" id="12_ranjm"]
+[ext_resource type="Texture2D" uid="uid://dvxwy8m60k7ht" path="res://assets/tiles/wall_large.png" id="13_765jl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_terrain"]
 resource_local_to_scene = true
@@ -48,10 +58,69 @@ visible = false
 position = Vector2(0, -27.5)
 shape = SubResource("RectangleShape2D_tile")
 
-[node name="Debug" type="Sprite2D" parent="." unique_id=61954219]
+[node name="CollisionPlain" type="CollisionPolygon2D" parent="." unique_id=2091952978]
 visible = false
+polygon = PackedVector2Array(-16, -8, 0, -18, 16, -9, 0, 0)
+
+[node name="CollisionForest" type="CollisionPolygon2D" parent="." unique_id=203013661]
+visible = false
+polygon = PackedVector2Array(-16, -8, -12, -26, 0, -32, 12, -26, 16, -9, 0, 0)
+
+[node name="CollisionWall" type="CollisionPolygon2D" parent="." unique_id=1256042669]
+visible = false
+polygon = PackedVector2Array(-16, -8, -16, -36, 0, -45, 16, -37, 16, -9, 0, 0)
+
+[node name="CollisionTowerOff" type="CollisionPolygon2D" parent="." unique_id=1468664561]
+visible = false
+polygon = PackedVector2Array(-16, -8, -11, -43, 0, -47, 11, -43, 16, -9, 0, 0)
+
+[node name="CollisionTowerOn" type="CollisionPolygon2D" parent="." unique_id=1306018215]
+visible = false
+polygon = PackedVector2Array(-16, -8, -9, -55, 9, -55, 16, -9, 0, 0)
+
+[node name="Debug" type="Node2D" parent="." unique_id=20135231]
+visible = false
+
+[node name="Floor" type="Sprite2D" parent="Debug" unique_id=580759613]
+position = Vector2(0, -24)
+texture = ExtResource("3_vknvr")
+
+[node name="RocksLarge" type="Sprite2D" parent="Debug" unique_id=1765401273]
+position = Vector2(0, -24)
+texture = ExtResource("4_jdkp0")
+
+[node name="RocksSmall" type="Sprite2D" parent="Debug" unique_id=1237891230]
+position = Vector2(0, -24)
+texture = ExtResource("5_q8xw3")
+
+[node name="Tower" type="Sprite2D" parent="Debug" unique_id=1025941450]
 position = Vector2(0, -24)
 texture = ExtResource("3_jy7pm")
 
-[node name="CollisionTowerOff" type="CollisionPolygon2D" parent="." unique_id=1109322559]
-polygon = PackedVector2Array(-16, -7, -15, -10, -11, -12, -8, -15, -5, -17, -5, -31, -10, -34, -10, -39, -7, -44, -2, -39, 4, -39, 9, -42, 10, -37, 10, -33, 6, -30, 6, -16, 10, -15, 10, -12, 14, -12, 16, -8, 14, -6, 2, 0)
+[node name="TowerOff" type="Sprite2D" parent="Debug" unique_id=684633336]
+position = Vector2(0, -24)
+texture = ExtResource("7_lkxpj")
+
+[node name="TowerOffRocksLarge" type="Sprite2D" parent="Debug" unique_id=1217688810]
+position = Vector2(0, -24)
+texture = ExtResource("8_lf0mp")
+
+[node name="TowerOffRocksSmall" type="Sprite2D" parent="Debug" unique_id=1712259162]
+position = Vector2(0, -24)
+texture = ExtResource("9_ufjw7")
+
+[node name="TowerRocksLarge" type="Sprite2D" parent="Debug" unique_id=784677535]
+position = Vector2(0, -24)
+texture = ExtResource("10_3ngql")
+
+[node name="TowerRocksSmall" type="Sprite2D" parent="Debug" unique_id=1990815538]
+position = Vector2(0, -24)
+texture = ExtResource("11_gqnqq")
+
+[node name="Wall" type="Sprite2D" parent="Debug" unique_id=25564436]
+position = Vector2(0, -24)
+texture = ExtResource("12_ranjm")
+
+[node name="WallLarge" type="Sprite2D" parent="Debug" unique_id=21317007]
+position = Vector2(0, -24)
+texture = ExtResource("13_765jl")
