@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://duhjl1hqj8bgn"]
 
-[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://ui/theme.tres" id="1_1dbcr"]
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://assets/ui/theme.tres" id="1_1dbcr"]
 [ext_resource type="Script" uid="uid://dk4tcbmgowabs" path="res://menus/options_menu.gd" id="1_6r3ve"]
 
 [node name="OptionsMenu" type="CenterContainer" unique_id=2083195002]

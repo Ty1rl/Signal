@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://b0ciiar6k1gua" path="res://assets/prototype/isometric_tile_set.tres" id="3_ts4ud"]
 [ext_resource type="Script" uid="uid://bvcqmw84luhvx" path="res://scripts/glow_overlay.gd" id="4_ep22m"]
 [ext_resource type="PackedScene" uid="uid://dh1sknka87ugd" path="res://scenes/drawer.tscn" id="4_jd1fy"]
-[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://ui/theme.tres" id="6_ts4ud"]
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://assets/ui/theme.tres" id="6_ts4ud"]
 
 [node name="LevelBase" type="Node2D" unique_id=196843778]
 script = ExtResource("1_da5si")

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://gj4t7rphok1f" path="res://menus/title_menu.tscn" id="1_ij7vn"]
 [ext_resource type="Script" uid="uid://pyogbune01qc" path="res://menus/main_menu.gd" id="1_yjgyn"]
 [ext_resource type="PackedScene" uid="uid://duhjl1hqj8bgn" path="res://menus/options_menu.tscn" id="2_yjgyn"]
+[ext_resource type="AudioStream" uid="uid://umavaj7s0gla" path="res://assets/audio/Radio Etalia.mp3" id="4_rqbgu"]
 
 [node name="MainMenu" type="Control" unique_id=679425725]
 layout_mode = 3
@@ -19,6 +20,12 @@ layout_mode = 1
 [node name="OptionsMenu" parent="." unique_id=2083195002 instance=ExtResource("2_yjgyn")]
 visible = false
 layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=258372018]
+stream = ExtResource("4_rqbgu")
+volume_db = -10.0
+pitch_scale = 0.5
+autoplay = true
 
 [connection signal="pressed" from="TitleMenu/TitleVBox/BottonVBox/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="OptionsMenu/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://bxe3oepesv06h"]
+
+[ext_resource type="FontFile" uid="uid://d2dfxc6j1ujnv" path="res://assets/ui/fonts/DSEG14Classic-Regular.ttf" id="1_go05t"]
+
+[resource]
+default_font = ExtResource("1_go05t")
