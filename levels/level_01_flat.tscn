@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://c7bqysvucktak"]
-
-[ext_resource type="PackedScene" uid="uid://dj3f7m5j5l8hw" path="res://levels/level_base.tscn" id="1_prjvn"]
-[ext_resource type="Script" uid="uid://cmeo3t5jguu6p" path="res://levels/level_01_flat.gd" id="2_vwp7o"]
-
-[node name="Level01Flat" unique_id=196843778 instance=ExtResource("1_prjvn")]
-script = ExtResource("2_vwp7o")
