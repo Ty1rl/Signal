@@ -1,18 +1,7 @@
 [gd_scene format=3 uid="uid://dfjf68yxjlvxj"]
 
-[ext_resource type="PackedScene" uid="uid://dj3f7m5j5l8hw" path="res://levels/level_base.tscn" id="1_3reu6"]
-[ext_resource type="Script" uid="uid://dfuauuvmuxuqt" path="res://levels/level_generated.gd" id="2_fdh6k"]
-[ext_resource type="TileSet" uid="uid://0woaie0vft5r" path="res://assets/tiles/tiles_tile_set.tres" id="3_sqpx3"]
+[ext_resource type="PackedScene" uid="uid://dj3f7m5j5l8hw" path="res://levels/level_base.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://dfuauuvmuxuqt" path="res://levels/level_generated.gd" id="2_gen"]
 
-[node name="LevelBase" unique_id=196843778 instance=ExtResource("1_3reu6")]
-script = ExtResource("2_fdh6k")
-
-[node name="TerrainLayer" parent="." index="1" unique_id=232634099]
-tile_set = ExtResource("3_sqpx3")
-
-[node name="GlowOverlay" parent="." index="2" unique_id=1620992632]
-z_index = 150
-
-[node name="DebugOverlay" parent="." index="4" unique_id=654225365]
-visible = false
-z_index = 10
+[node name="LevelGenerated" unique_id=588495320 instance=ExtResource("1_base")]
+script = ExtResource("2_gen")

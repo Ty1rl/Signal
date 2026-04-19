@@ -1,69 +1,57 @@
 [gd_scene format=3 uid="uid://dj3f7m5j5l8hw"]
 
-[ext_resource type="Script" uid="uid://cnrlbd5tlx3b" path="res://levels/level_base.gd" id="1_da5si"]
-[ext_resource type="Script" uid="uid://d1vhl1h1lt3yl" path="res://scripts/camera_2d.gd" id="2_ep22m"]
-[ext_resource type="TileSet" uid="uid://b0ciiar6k1gua" path="res://assets/prototype/isometric_tile_set.tres" id="3_ts4ud"]
-[ext_resource type="Script" uid="uid://bvcqmw84luhvx" path="res://scripts/glow_overlay.gd" id="4_ep22m"]
-[ext_resource type="PackedScene" uid="uid://dh1sknka87ugd" path="res://scenes/drawer.tscn" id="4_jd1fy"]
-[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://assets/ui/theme.tres" id="6_ts4ud"]
-[ext_resource type="Script" uid="uid://dih0i0ywv3byh" path="res://levels/debug_overlay.gd" id="7_jd1fy"]
+[ext_resource type="Script" uid="uid://cnrlbd5tlx3b" path="res://levels/level_base.gd" id="1_base"]
+[ext_resource type="Script" uid="uid://d1vhl1h1lt3yl" path="res://scripts/camera_2d.gd" id="2_cam"]
+[ext_resource type="PackedScene" uid="uid://dh1sknka87ugd" path="res://scenes/drawer.tscn" id="3_drawer"]
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://assets/ui/theme.tres" id="4_theme"]
 
-[node name="LevelBase" type="Node2D" unique_id=196843778]
+[node name="LevelBase" type="Node2D" unique_id=836221922]
 y_sort_enabled = true
-script = ExtResource("1_da5si")
-metadata/_edit_horizontal_guides_ = [816.0]
+script = ExtResource("1_base")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2101443626]
-position = Vector2(400, 98)
-script = ExtResource("2_ep22m")
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1705684684]
+position = Vector2(0, 60)
+script = ExtResource("2_cam")
 
-[node name="TerrainLayer" type="TileMapLayer" parent="." unique_id=232634099]
+[node name="TerrainGrid" type="Node2D" parent="." unique_id=1455815006]
 y_sort_enabled = true
-tile_set = ExtResource("3_ts4ud")
 
-[node name="GlowOverlay" type="Node2D" parent="." unique_id=1620992632]
-script = ExtResource("4_ep22m")
+[node name="UI" type="CanvasLayer" parent="." unique_id=566672239]
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1766201632]
-
-[node name="Drawer" parent="UI" unique_id=1755069698 instance=ExtResource("4_jd1fy")]
+[node name="Drawer" parent="UI" unique_id=1782604100 instance=ExtResource("3_drawer")]
 offset_right = 128.0
 offset_bottom = 60.0
-metadata/_edit_use_anchors_ = true
 
-[node name="QuitButton" type="Button" parent="UI" unique_id=69145608]
+[node name="QuitButton" type="Button" parent="UI" unique_id=1269348730]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -86.0
 offset_bottom = 31.0
 grow_horizontal = 0
-theme = ExtResource("6_ts4ud")
+theme = ExtResource("4_theme")
 text = "Quit Level"
 
-[node name="QuitConfirm" type="ConfirmationDialog" parent="UI" unique_id=16154603]
-theme = ExtResource("6_ts4ud")
+[node name="QuitConfirm" type="ConfirmationDialog" parent="UI" unique_id=1182014736]
+theme = ExtResource("4_theme")
 ok_button_text = "Confirm Quit Level"
 cancel_button_text = "Keep Playing Level"
 
-[node name="WinDialog" type="ConfirmationDialog" parent="UI" unique_id=1360606412]
+[node name="WinDialog" type="ConfirmationDialog" parent="UI" unique_id=1816151530]
 title = "Target Reached"
-theme = ExtResource("6_ts4ud")
+theme = ExtResource("4_theme")
 ok_button_text = "Return to Level Selection"
 dialog_text = "Integrity remaining: xxx"
 cancel_button_text = "Keep Playing"
 
-[node name="IntegrityLabel" type="Label" parent="UI" unique_id=1908359938]
+[node name="IntegrityLabel" type="Label" parent="UI" unique_id=1152228]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 60.0
 offset_bottom = 43.0
-theme = ExtResource("6_ts4ud")
+theme = ExtResource("4_theme")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 24
 text = "Integrity: 100"
-
-[node name="DebugOverlay" type="Node2D" parent="." unique_id=654225365]
-script = ExtResource("7_jd1fy")
