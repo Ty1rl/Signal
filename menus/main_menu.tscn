@@ -5,6 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://duhjl1hqj8bgn" path="res://menus/options_menu.tscn" id="2_yjgyn"]
 [ext_resource type="AudioStream" uid="uid://umavaj7s0gla" path="res://assets/audio/Radio Etalia.mp3" id="4_rqbgu"]
 
+[sub_resource type="Environment" id="Environment_rqbgu"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.0
+glow_bloom = 1.0
+
 [node name="MainMenu" type="Control" unique_id=679425725]
 layout_mode = 3
 anchors_preset = 15
@@ -26,6 +32,9 @@ stream = ExtResource("4_rqbgu")
 volume_db = -10.0
 pitch_scale = 0.5
 autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=213645198]
+environment = SubResource("Environment_rqbgu")
 
 [connection signal="pressed" from="TitleMenu/TitleVBox/BottonVBox/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="OptionsMenu/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
