@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://gj4t7rphok1f" path="res://menus/title_menu.tscn" id="1_ij7vn"]
 [ext_resource type="Script" uid="uid://pyogbune01qc" path="res://menus/main_menu.gd" id="1_yjgyn"]
 [ext_resource type="PackedScene" uid="uid://duhjl1hqj8bgn" path="res://menus/options_menu.tscn" id="2_yjgyn"]
+[ext_resource type="PackedScene" uid="uid://d0h7726xfwl3s" path="res://menus/level_select.tscn" id="4_rqbgu"]
 
 [sub_resource type="Environment" id="Environment_rqbgu"]
 background_mode = 3
@@ -26,9 +27,14 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="LevelSelect" parent="." unique_id=782599961 instance=ExtResource("4_rqbgu")]
+visible = false
+layout_mode = 1
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=213645198]
 environment = SubResource("Environment_rqbgu")
 
+[connection signal="pressed" from="TitleMenu/TitleVBox/BottonVBox/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TitleMenu/TitleVBox/BottonVBox/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="OptionsMenu/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 
