@@ -1,7 +1,7 @@
 class_name LevelBase
 extends Node2D
 
-@onready var gameplay_layer: TileMapLayer = $GameplayTileMapLayer
+@onready var terrain_layer: TileMapLayer = $TerrainLayer
 @onready var drawer: PanelContainer = $UI/Drawer
 @onready var quit_button: Button = $UI/QuitButton
 @onready var quit_confirm: ConfirmationDialog = $UI/QuitConfirm
@@ -10,14 +10,21 @@ extends Node2D
 @onready var integrity_label: Label = $UI/IntegrityLabel
 @onready var win_dialog: ConfirmationDialog = $UI/WinDialog
 
-const FLOOR_SOURCE_ID: int = 1                   
-const FLOOR_ATLAS_COORDS: Vector2i = Vector2i(0, 0)  
+#const FLOOR_SOURCE_ID: int = 1                   
+#const FLOOR_ATLAS_COORDS: Vector2i = Vector2i(0, 0)  
+#
+#const FOREST_SOURCE_ID: int = 0
+#const FOREST_ATLAS_COORDS: Vector2i = Vector2i(0, 0)
+#
+#const WALL_SOURCE_ID: int = 2
+#const WALL_ATLAS_COORDS: Vector2i = Vector2i(0, 0)
 
-const FOREST_SOURCE_ID: int = 0
-const FOREST_ATLAS_COORDS: Vector2i = Vector2i(0, 0)
-
-const WALL_SOURCE_ID: int = 2
-const WALL_ATLAS_COORDS: Vector2i = Vector2i(0, 0)
+const FLOOR_SOURCE_ID: int = 8
+const FLOOR_ATLAS_COORDS: Vector2i = Vector2i(0, 0)
+const FOREST_SOURCE_ID: int = 8
+const FOREST_ATLAS_COORDS: Vector2i = Vector2i(1, 0)  # second rock
+const WALL_SOURCE_ID: int = 8
+const WALL_ATLAS_COORDS: Vector2i = Vector2i(2, 0)    # third rock
 
 const TOWER_SCENE := preload("res://scenes/tower.tscn")
 #const TRANSMIT_RANGE_TILES: int = 3
@@ -48,8 +55,43 @@ func _ready() -> void:
 	quit_confirm.confirmed.connect(_on_quit_confirmed)
 	win_dialog.confirmed.connect(_on_win_confirmed)
 	_spawn_towers()
-	glow_overlay.tile_size = gameplay_layer.tile_set.tile_size
-	glow_overlay.tile_origin_local = gameplay_layer.map_to_local
+	
+	######################
+	var debug_overlay: Node2D = $DebugOverlay
+	var grid_w: int = 15  # or read from level_data if available
+	var grid_h: int = 15
+	debug_overlay.setup(terrain_layer, towers, tower_positions, grid_w, grid_h, source_index)
+	######################
+	# Inspect what's going on with sort
+	print("--- Sort diagnosis ---")
+	print("TerrainLayer y_sort_enabled: ", terrain_layer.y_sort_enabled)
+	print("TerrainLayer z_index: ", terrain_layer.z_index)
+	print("TerrainLayer z_as_relative: ", terrain_layer.z_as_relative)
+
+	var tower0 = towers[0]
+	print("Tower[0] y_sort_enabled: ", tower0.y_sort_enabled)
+	print("Tower[0] z_index: ", tower0.z_index)
+	print("Tower[0] z_as_relative: ", tower0.z_as_relative)
+	print("Tower[0] position: ", tower0.position)
+	print("Tower[0] global_position: ", tower0.global_position)
+	print("Tower[0] parent: ", tower0.get_parent().name)
+
+	# Check if terrain_layer has tiles at tower positions
+	var tile_at_tower = terrain_layer.get_cell_source_id(tower_positions[0])
+	print("Tile at tower[0]'s cell (source_id): ", tile_at_tower)
+
+	# Visual child check
+	var visual = tower0.get_node_or_null("Visual")
+	if visual:
+		print("Visual y_sort_enabled: ", visual.y_sort_enabled)
+		print("Visual position: ", visual.position)
+		print("Visual children count: ", visual.get_child_count())
+		for child in visual.get_children():
+			print("  - ", child.name, " pos=", child.position, " type=", child.get_class())
+		####
+	
+	glow_overlay.tile_size = terrain_layer.tile_set.tile_size
+	glow_overlay.tile_origin_local = terrain_layer.map_to_local
 	_update_glow()
 	_update_integrity_label()
 
@@ -61,38 +103,12 @@ func _update_integrity_label() -> void:
 		integrity_label.remove_theme_color_override("font_color")
 
 func _spawn_towers() -> void:
-	var sort_order = range(tower_positions.size())
-	sort_order.sort_custom(func(a, b):
-		if tower_positions[a].y != tower_positions[b].y:
-			return tower_positions[a].y < tower_positions[b].y
-		return tower_positions[a].x < tower_positions[b].x
-	)
-	
-	# Remember what source/target were before sorting
-	var original_source_pos: Vector2i = tower_positions[source_index] if source_index >= 0 else Vector2i(-1, -1)
-	var original_target_pos: Vector2i = tower_positions[target_index] if target_index >= 0 else Vector2i(-1, -1)
-	
-	# Reorder tower_positions to match spawn order
-	var new_positions: Array[Vector2i] = []
-	for i in sort_order:
-		new_positions.append(tower_positions[i])
-	tower_positions = new_positions
-	
-	# Find new indices for source and target
-	source_index = -1
-	target_index = -1
-	for i in tower_positions.size():
-		if tower_positions[i] == original_source_pos:
-			source_index = i
-		if tower_positions[i] == original_target_pos:
-			target_index = i
-	
-	# Now spawn in the (already sorted) tower_positions order
 	for i in tower_positions.size():
 		var tower: Area2D = TOWER_SCENE.instantiate()
-		tower.position = gameplay_layer.map_to_local(tower_positions[i])
+		tower.position = terrain_layer.map_to_local(tower_positions[i])
+		#tower.z_index = tower_positions[i].x + tower_positions[i].y + 1
 		tower.clicked.connect(_on_tower_clicked.bind(i))
-		add_child(tower)
+		terrain_layer.add_child(tower)
 		towers.append(tower)
 		transmitters.append(false)
 		controlled.append(false)
@@ -101,6 +117,50 @@ func _spawn_towers() -> void:
 		controlled[source_index] = true
 	_recompute_control()
 	_update_tower_visuals()
+
+#func _spawn_towers() -> void:
+	#var sort_order = range(tower_positions.size())
+	#sort_order.sort_custom(func(a, b):
+		#if tower_positions[a].y != tower_positions[b].y:
+			#return tower_positions[a].y < tower_positions[b].y
+		#return tower_positions[a].x < tower_positions[b].x
+	#)
+	#
+	## Remember what source/target were before sorting
+	#var original_source_pos: Vector2i = tower_positions[source_index] if source_index >= 0 else Vector2i(-1, -1)
+	#var original_target_pos: Vector2i = tower_positions[target_index] if target_index >= 0 else Vector2i(-1, -1)
+	#
+	## Reorder tower_positions to match spawn order
+	#var new_positions: Array[Vector2i] = []
+	#for i in sort_order:
+		#new_positions.append(tower_positions[i])
+	#tower_positions = new_positions
+	#
+	## Find new indices for source and target
+	#source_index = -1
+	#target_index = -1
+	#for i in tower_positions.size():
+		#if tower_positions[i] == original_source_pos:
+			#source_index = i
+		#if tower_positions[i] == original_target_pos:
+			#target_index = i
+	#
+	## Now spawn in the (already sorted) tower_positions order
+	#for i in tower_positions.size():
+		#var tower: Area2D = TOWER_SCENE.instantiate()
+		#tower.position = terrain_layer.map_to_local(tower_positions[i])
+		#tower.z_index = tower_positions[i].x + tower_positions[i].y + 1 
+		#tower.clicked.connect(_on_tower_clicked.bind(i))
+		##add_child(tower)
+		#terrain_layer.add_child(tower)
+		#towers.append(tower)
+		#transmitters.append(false)
+		#controlled.append(false)
+	#
+	#if source_index >= 0:
+		#controlled[source_index] = true
+	#_recompute_control()
+	#_update_tower_visuals()
 
 
 func _recompute_control() -> void:
@@ -173,7 +233,7 @@ func _flood_from(origin: Vector2i, shape_name: String) -> void:
 
 func _tile_terrain(tile: Vector2i) -> String:
 	# Lookup the tile's terrain by checking the background tilemap
-	var bg: TileMapLayer = $BackgroundTileMapLayer
+	var bg: TileMapLayer = $TerrainLayer
 	var source_id := bg.get_cell_source_id(tile)
 	var atlas := bg.get_cell_atlas_coords(tile)
 	if source_id == -1:

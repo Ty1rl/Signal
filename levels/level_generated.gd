@@ -40,12 +40,16 @@ func _ready() -> void:
 
 	# After towers are spawned, paint tiles from JSON
 	_paint_tiles_from_data()
+	
+	print("tower[0] pos: ", towers[0].position, " y_sort_enabled: ", towers[0].y_sort_enabled)
+	print("terrain_layer y_sort_enabled: ", terrain_layer.y_sort_enabled)
+	print("terrain_layer child count: ", terrain_layer.get_child_count())	
 
 
 func _paint_tiles_from_data() -> void:
 	# Tiles JSON only ships non-plain tiles; plain is the default floor.
 	# First paint a full plain floor for the grid, then overlay the non-plain.
-	var bg: TileMapLayer = $BackgroundTileMapLayer
+	var bg: TileMapLayer = $TerrainLayer
 	var grid_w: int = int(level_data.get("grid_w", 15))
 	var grid_h: int = int(level_data.get("grid_h", 15))
 
@@ -68,6 +72,11 @@ func _paint_tiles_from_data() -> void:
 				source_id = WALL_SOURCE_ID
 				atlas_coords = WALL_ATLAS_COORDS
 		bg.set_cell(pos, source_id, atlas_coords)
+		
+	print("Tile at (5,14) source_id: ", bg.get_cell_source_id(Vector2i(5, 14)))
+	print("Tile at (1,13) source_id: ", bg.get_cell_source_id(Vector2i(1, 13)))
+	print("TerrainLayer z_index: ", bg.z_index)
+	print("TerrainLayer z_as_relative: ", bg.z_as_relative)		
 
 
 func _edge_key(a_id: String, b_id: String) -> String:
