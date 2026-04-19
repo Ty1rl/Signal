@@ -1,0 +1,767 @@
+{
+  "label": "seed=5",
+  "grid_w": 15,
+  "grid_h": 15,
+  "source": [
+    1,
+    13
+  ],
+  "target": [
+    13,
+    1
+  ],
+  "budget": 100,
+  "towers": [
+    {
+      "id": "Source",
+      "x": 1,
+      "y": 13,
+      "is_scenery": false,
+      "is_trap": false,
+      "is_source": true,
+      "is_target": false
+    },
+    {
+      "id": "Target",
+      "x": 13,
+      "y": 1,
+      "is_scenery": false,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": true
+    },
+    {
+      "id": "Main_1",
+      "x": 3,
+      "y": 13,
+      "is_scenery": false,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Main_2",
+      "x": 3,
+      "y": 11,
+      "is_scenery": false,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Main_3",
+      "x": 3,
+      "y": 6,
+      "is_scenery": false,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Main_4",
+      "x": 3,
+      "y": 1,
+      "is_scenery": false,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Main_5",
+      "x": 8,
+      "y": 1,
+      "is_scenery": false,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Trap0_0",
+      "x": 5,
+      "y": 13,
+      "is_scenery": false,
+      "is_trap": true,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Trap0_1",
+      "x": 5,
+      "y": 10,
+      "is_scenery": false,
+      "is_trap": true,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Trap1_0",
+      "x": 6,
+      "y": 6,
+      "is_scenery": false,
+      "is_trap": true,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Trap1_1",
+      "x": 8,
+      "y": 6,
+      "is_scenery": false,
+      "is_trap": true,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Trap2_0",
+      "x": 1,
+      "y": 11,
+      "is_scenery": false,
+      "is_trap": true,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Trap2_1",
+      "x": 1,
+      "y": 9,
+      "is_scenery": false,
+      "is_trap": true,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Scene_0",
+      "x": 6,
+      "y": 2,
+      "is_scenery": true,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Scene_1",
+      "x": 13,
+      "y": 6,
+      "is_scenery": true,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Scene_2",
+      "x": 11,
+      "y": 1,
+      "is_scenery": true,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Scene_3",
+      "x": 12,
+      "y": 11,
+      "is_scenery": true,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Scene_4",
+      "x": 11,
+      "y": 3,
+      "is_scenery": true,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    },
+    {
+      "id": "Scene_5",
+      "x": 9,
+      "y": 13,
+      "is_scenery": true,
+      "is_trap": false,
+      "is_source": false,
+      "is_target": false
+    }
+  ],
+  "edges": [
+    {
+      "a_id": "Main_1",
+      "b_id": "Source",
+      "distance": 2,
+      "terrain": "wall",
+      "is_scenery": false,
+      "damaged": false
+    },
+    {
+      "a_id": "Main_1",
+      "b_id": "Main_2",
+      "distance": 2,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": false
+    },
+    {
+      "a_id": "Main_2",
+      "b_id": "Main_3",
+      "distance": 5,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": false
+    },
+    {
+      "a_id": "Main_3",
+      "b_id": "Main_4",
+      "distance": 5,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": false
+    },
+    {
+      "a_id": "Main_4",
+      "b_id": "Main_5",
+      "distance": 5,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": false
+    },
+    {
+      "a_id": "Main_5",
+      "b_id": "Target",
+      "distance": 5,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": false
+    },
+    {
+      "a_id": "Main_1",
+      "b_id": "Trap0_0",
+      "distance": 7,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": true
+    },
+    {
+      "a_id": "Trap0_0",
+      "b_id": "Trap0_1",
+      "distance": 7,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": true
+    },
+    {
+      "a_id": "Main_3",
+      "b_id": "Trap1_0",
+      "distance": 4,
+      "terrain": "wall",
+      "is_scenery": false,
+      "damaged": true
+    },
+    {
+      "a_id": "Trap1_0",
+      "b_id": "Trap1_1",
+      "distance": 2,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": false
+    },
+    {
+      "a_id": "Main_2",
+      "b_id": "Trap2_0",
+      "distance": 2,
+      "terrain": "plain",
+      "is_scenery": false,
+      "damaged": false
+    },
+    {
+      "a_id": "Trap2_0",
+      "b_id": "Trap2_1",
+      "distance": 4,
+      "terrain": "wall",
+      "is_scenery": false,
+      "damaged": true
+    }
+  ],
+  "tiles": [
+    {
+      "x": 1,
+      "y": 13,
+      "terrain": "wall"
+    },
+    {
+      "x": 2,
+      "y": 13,
+      "terrain": "wall"
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "terrain": "wall"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "terrain": "wall"
+    },
+    {
+      "x": 5,
+      "y": 11,
+      "terrain": "wall"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "terrain": "wall"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "terrain": "wall"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "terrain": "wall"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "terrain": "wall"
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "terrain": "wall"
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "terrain": "wall"
+    },
+    {
+      "x": 8,
+      "y": 4,
+      "terrain": "wall"
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "terrain": "wall"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "terrain": "wall"
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "terrain": "wall"
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "terrain": "wall"
+    },
+    {
+      "x": 1,
+      "y": 10,
+      "terrain": "wall"
+    },
+    {
+      "x": 1,
+      "y": 9,
+      "terrain": "wall"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "terrain": "forest"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "terrain": "forest"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "terrain": "forest"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "terrain": "forest"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "terrain": "forest"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "terrain": "forest"
+    },
+    {
+      "x": 0,
+      "y": 9,
+      "terrain": "forest"
+    },
+    {
+      "x": 0,
+      "y": 10,
+      "terrain": "wall"
+    },
+    {
+      "x": 0,
+      "y": 11,
+      "terrain": "forest"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "terrain": "wall"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "terrain": "wall"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "terrain": "forest"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "terrain": "wall"
+    },
+    {
+      "x": 1,
+      "y": 8,
+      "terrain": "forest"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "terrain": "forest"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "terrain": "forest"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "terrain": "forest"
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "terrain": "forest"
+    },
+    {
+      "x": 5,
+      "y": 9,
+      "terrain": "forest"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "terrain": "forest"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "terrain": "forest"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "terrain": "forest"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "terrain": "forest"
+    },
+    {
+      "x": 6,
+      "y": 14,
+      "terrain": "forest"
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "terrain": "forest"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "terrain": "forest"
+    },
+    {
+      "x": 8,
+      "y": 12,
+      "terrain": "forest"
+    },
+    {
+      "x": 8,
+      "y": 13,
+      "terrain": "forest"
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "terrain": "wall"
+    },
+    {
+      "x": 9,
+      "y": 10,
+      "terrain": "forest"
+    },
+    {
+      "x": 9,
+      "y": 13,
+      "terrain": "forest"
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "terrain": "forest"
+    },
+    {
+      "x": 10,
+      "y": 7,
+      "terrain": "wall"
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "terrain": "forest"
+    },
+    {
+      "x": 10,
+      "y": 10,
+      "terrain": "forest"
+    },
+    {
+      "x": 10,
+      "y": 11,
+      "terrain": "forest"
+    },
+    {
+      "x": 10,
+      "y": 14,
+      "terrain": "forest"
+    },
+    {
+      "x": 11,
+      "y": 3,
+      "terrain": "forest"
+    },
+    {
+      "x": 11,
+      "y": 4,
+      "terrain": "wall"
+    },
+    {
+      "x": 11,
+      "y": 5,
+      "terrain": "wall"
+    },
+    {
+      "x": 11,
+      "y": 6,
+      "terrain": "forest"
+    },
+    {
+      "x": 11,
+      "y": 8,
+      "terrain": "wall"
+    },
+    {
+      "x": 11,
+      "y": 11,
+      "terrain": "forest"
+    },
+    {
+      "x": 11,
+      "y": 12,
+      "terrain": "forest"
+    },
+    {
+      "x": 11,
+      "y": 14,
+      "terrain": "forest"
+    },
+    {
+      "x": 12,
+      "y": 3,
+      "terrain": "wall"
+    },
+    {
+      "x": 12,
+      "y": 8,
+      "terrain": "wall"
+    },
+    {
+      "x": 12,
+      "y": 10,
+      "terrain": "wall"
+    },
+    {
+      "x": 12,
+      "y": 11,
+      "terrain": "wall"
+    },
+    {
+      "x": 12,
+      "y": 12,
+      "terrain": "forest"
+    },
+    {
+      "x": 12,
+      "y": 14,
+      "terrain": "wall"
+    },
+    {
+      "x": 13,
+      "y": 6,
+      "terrain": "wall"
+    },
+    {
+      "x": 13,
+      "y": 11,
+      "terrain": "forest"
+    },
+    {
+      "x": 13,
+      "y": 14,
+      "terrain": "forest"
+    },
+    {
+      "x": 14,
+      "y": 3,
+      "terrain": "forest"
+    },
+    {
+      "x": 14,
+      "y": 7,
+      "terrain": "wall"
+    },
+    {
+      "x": 14,
+      "y": 8,
+      "terrain": "forest"
+    },
+    {
+      "x": 14,
+      "y": 12,
+      "terrain": "wall"
+    },
+    {
+      "x": 14,
+      "y": 14,
+      "terrain": "forest"
+    }
+  ],
+  "shapes": {
+    "Wide": {
+      "range": 3,
+      "cost": 10,
+      "passes": [
+        "forest",
+        "plain"
+      ]
+    },
+    "Pulse": {
+      "range": 5,
+      "cost": 15,
+      "passes": [
+        "plain"
+      ]
+    },
+    "Skip": {
+      "range": 2,
+      "cost": 25,
+      "passes": [
+        "forest",
+        "plain",
+        "wall"
+      ]
+    }
+  },
+  "solutions": [
+    {
+      "cost": 95,
+      "steps": [
+        {
+          "node": "Source",
+          "shape": null
+        },
+        {
+          "node": "Main_1",
+          "shape": "Skip"
+        },
+        {
+          "node": "Main_2",
+          "shape": "Wide"
+        },
+        {
+          "node": "Main_3",
+          "shape": "Pulse"
+        },
+        {
+          "node": "Main_4",
+          "shape": "Pulse"
+        },
+        {
+          "node": "Main_5",
+          "shape": "Pulse"
+        },
+        {
+          "node": "Target",
+          "shape": "Pulse"
+        }
+      ]
+    },
+    {
+      "cost": 100,
+      "steps": [
+        {
+          "node": "Source",
+          "shape": null
+        },
+        {
+          "node": "Main_1",
+          "shape": "Skip"
+        },
+        {
+          "node": "Main_2",
+          "shape": "Pulse"
+        },
+        {
+          "node": "Main_3",
+          "shape": "Pulse"
+        },
+        {
+          "node": "Main_4",
+          "shape": "Pulse"
+        },
+        {
+          "node": "Main_5",
+          "shape": "Pulse"
+        },
+        {
+          "node": "Target",
+          "shape": "Pulse"
+        }
+      ]
+    }
+  ],
+  "status": "GOOD(2)"
+}
