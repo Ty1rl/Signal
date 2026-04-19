@@ -61,6 +61,33 @@ func _update_integrity_label() -> void:
 		integrity_label.remove_theme_color_override("font_color")
 
 func _spawn_towers() -> void:
+	var sort_order = range(tower_positions.size())
+	sort_order.sort_custom(func(a, b):
+		if tower_positions[a].y != tower_positions[b].y:
+			return tower_positions[a].y < tower_positions[b].y
+		return tower_positions[a].x < tower_positions[b].x
+	)
+	
+	# Remember what source/target were before sorting
+	var original_source_pos: Vector2i = tower_positions[source_index] if source_index >= 0 else Vector2i(-1, -1)
+	var original_target_pos: Vector2i = tower_positions[target_index] if target_index >= 0 else Vector2i(-1, -1)
+	
+	# Reorder tower_positions to match spawn order
+	var new_positions: Array[Vector2i] = []
+	for i in sort_order:
+		new_positions.append(tower_positions[i])
+	tower_positions = new_positions
+	
+	# Find new indices for source and target
+	source_index = -1
+	target_index = -1
+	for i in tower_positions.size():
+		if tower_positions[i] == original_source_pos:
+			source_index = i
+		if tower_positions[i] == original_target_pos:
+			target_index = i
+	
+	# Now spawn in the (already sorted) tower_positions order
 	for i in tower_positions.size():
 		var tower: Area2D = TOWER_SCENE.instantiate()
 		tower.position = gameplay_layer.map_to_local(tower_positions[i])
@@ -69,11 +96,9 @@ func _spawn_towers() -> void:
 		towers.append(tower)
 		transmitters.append(false)
 		controlled.append(false)
-
+	
 	if source_index >= 0:
 		controlled[source_index] = true
-		#transmitters[source_index] = true
-		#transmitter_shape[source_index] = "Wide"   # default starting shape for source
 	_recompute_control()
 	_update_tower_visuals()
 
