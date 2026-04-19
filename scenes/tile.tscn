@@ -44,6 +44,7 @@ texture = SubResource("AtlasTexture_highlight")
 offset = Vector2(0, -24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1620584781]
+visible = false
 position = Vector2(0, -27.5)
 shape = SubResource("RectangleShape2D_tile")
 
@@ -52,6 +53,5 @@ visible = false
 position = Vector2(0, -24)
 texture = ExtResource("3_jy7pm")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1109322559]
-visible = false
-polygon = PackedVector2Array(-16, -2, -16, -8, -10, -11, -10, -15, -5, -17, -5, -31, -10, -34, -10, -39, -7, -44, -5, -45, -6, -50, -4, -53, -1, -55, 2, -55, 6, -52, 6, -47, 4, -45, 9, -42, 10, -37, 10, -33, 6, -30, 6, -16, 10, -15, 10, -12, 14, -12, 16, -10, 16, -3, 16, 1, 1, 8, -11, 3, -16, 1)
+[node name="CollisionTowerOff" type="CollisionPolygon2D" parent="." unique_id=1109322559]
+polygon = PackedVector2Array(-16, -7, -15, -10, -11, -12, -8, -15, -5, -17, -5, -31, -10, -34, -10, -39, -7, -44, -2, -39, 4, -39, 9, -42, 10, -37, 10, -33, 6, -30, 6, -16, 10, -15, 10, -12, 14, -12, 16, -8, 14, -6, 2, 0)

@@ -9,7 +9,7 @@
 background_mode = 3
 glow_enabled = true
 glow_intensity = 1.0
-glow_bloom = 1.0
+glow_bloom = 0.1
 
 [node name="LevelBase" type="Node2D" unique_id=836221922]
 y_sort_enabled = true
