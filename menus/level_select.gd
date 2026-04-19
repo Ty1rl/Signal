@@ -8,7 +8,7 @@ func _ready() -> void:
 	back_button.pressed.connect(_on_back_pressed)
 
 func _on_level_01_pressed() -> void:
-	get_tree().change_scene_to_file("res://levels/level_01_flat.tscn")
+	get_tree().change_scene_to_file("res://levels/level_generated.tscn")
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://menus/main_menu.tscn")

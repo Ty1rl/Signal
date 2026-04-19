@@ -37,5 +37,5 @@ func _draw_floor_around_towers() -> void:
 		for y in range(min_y, max_y + 1):
 			background_layer.set_cell(Vector2i(x, y), FLOOR_SOURCE_ID, FLOOR_ATLAS_COORDS)
 
-const FLOOR_SOURCE_ID: int = 21                      # replace with real value
-const FLOOR_ATLAS_COORDS: Vector2i = Vector2i(8, 0)  # replace with real value
+#const FLOOR_SOURCE_ID: int = 21                      # replace with real value
+#const FLOOR_ATLAS_COORDS: Vector2i = Vector2i(8, 0)  # replace with real value

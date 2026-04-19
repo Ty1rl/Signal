@@ -15,15 +15,13 @@ position = Vector2(400, 98)
 script = ExtResource("2_ep22m")
 
 [node name="BackgroundTileMapLayer" type="TileMapLayer" parent="." unique_id=232634099]
-y_sort_enabled = true
+tile_set = ExtResource("3_ts4ud")
+
+[node name="GameplayTileMapLayer" type="TileMapLayer" parent="." unique_id=1066411183]
 tile_set = ExtResource("3_ts4ud")
 
 [node name="GlowOverlay" type="Node2D" parent="." unique_id=1620992632]
 script = ExtResource("4_ep22m")
-
-[node name="GameplayTileMapLayer" type="TileMapLayer" parent="." unique_id=1066411183]
-y_sort_enabled = true
-tile_set = ExtResource("3_ts4ud")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1766201632]
 
@@ -44,3 +42,20 @@ text = "Quit Level"
 [node name="QuitConfirm" type="ConfirmationDialog" parent="UI" unique_id=16154603]
 ok_button_text = "Confirm Quit Level"
 cancel_button_text = "Keep Playing Level"
+
+[node name="WinDialog" type="ConfirmationDialog" parent="UI" unique_id=1360606412]
+title = "Target Reached"
+ok_button_text = "Return to Level Selection"
+dialog_text = "Integrity remaining: xxx"
+cancel_button_text = "Keep Playing"
+
+[node name="IntegrityLabel" type="Label" parent="UI" unique_id=1908359938]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 24
+text = "Integrity: 100"
