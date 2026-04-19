@@ -5,6 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://dh1sknka87ugd" path="res://scenes/drawer.tscn" id="3_drawer"]
 [ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://assets/ui/theme.tres" id="4_theme"]
 
+[sub_resource type="Environment" id="Environment_da5si"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.0
+glow_bloom = 1.0
+
 [node name="LevelBase" type="Node2D" unique_id=836221922]
 y_sort_enabled = true
 script = ExtResource("1_base")
@@ -55,3 +61,6 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 24
 text = "Integrity: 100"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=517772981]
+environment = SubResource("Environment_da5si")

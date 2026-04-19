@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ikfgg5cd1f8o" path="res://scenes/tile.gd" id="1_tile"]
 [ext_resource type="Texture2D" uid="uid://d3i7rlvxhfln4" path="res://assets/tiles/tiles.png" id="2_tiles"]
-[ext_resource type="Texture2D" uid="uid://bab7vcs212g80" path="res://assets/tiles/floor_full.png" id="3_floor"]
-[ext_resource type="Texture2D" uid="uid://sls7gmjm2yre" path="res://assets/tiles/rocks_small.png" id="4_rocks"]
+[ext_resource type="Texture2D" uid="uid://blmtkrdnnde06" path="res://assets/tiles/tower.png" id="3_jy7pm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_terrain"]
 resource_local_to_scene = true
@@ -16,51 +15,43 @@ atlas = ExtResource("2_tiles")
 region = Rect2(0, 0, 32, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tile"]
-size = Vector2(32, 40.5)
+size = Vector2(32, 55)
 
-[node name="Tile" type="Area2D" unique_id=1059896258]
+[node name="Tile" type="Area2D" unique_id=829238386]
 script = ExtResource("1_tile")
 
-[node name="TerrainSprite" type="Sprite2D" parent="." unique_id=1586449753]
+[node name="TerrainSprite" type="Sprite2D" parent="." unique_id=1413353884]
 texture_filter = 1
 texture = SubResource("AtlasTexture_terrain")
 offset = Vector2(0, -24)
 
-[node name="TowerBase" type="Sprite2D" parent="." unique_id=551786370]
-visible = false
-texture_filter = 1
-position = Vector2(0, -27)
-texture = ExtResource("3_floor")
-
-[node name="TowerMid" type="Sprite2D" parent="." unique_id=26657703]
-visible = false
-texture_filter = 1
-position = Vector2(0, -42)
-texture = ExtResource("3_floor")
-
-[node name="TowerTop" type="Sprite2D" parent="." unique_id=1287500317]
-texture_filter = 1
-position = Vector2(-1, -59)
-texture = ExtResource("4_rocks")
-
-[node name="Highlight0" type="Sprite2D" parent="."]
+[node name="Highlight0" type="Sprite2D" parent="." unique_id=191175103]
 visible = false
 texture_filter = 1
 texture = SubResource("AtlasTexture_highlight")
 offset = Vector2(0, -24)
 
-[node name="Highlight1" type="Sprite2D" parent="."]
+[node name="Highlight1" type="Sprite2D" parent="." unique_id=1800535346]
 visible = false
 texture_filter = 1
 texture = SubResource("AtlasTexture_highlight")
 offset = Vector2(0, -24)
 
-[node name="Highlight2" type="Sprite2D" parent="."]
+[node name="Highlight2" type="Sprite2D" parent="." unique_id=526611383]
 visible = false
 texture_filter = 1
 texture = SubResource("AtlasTexture_highlight")
 offset = Vector2(0, -24)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1717672748]
-position = Vector2(0, -30.75)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1620584781]
+position = Vector2(0, -27.5)
 shape = SubResource("RectangleShape2D_tile")
+
+[node name="Debug" type="Sprite2D" parent="." unique_id=61954219]
+visible = false
+position = Vector2(0, -24)
+texture = ExtResource("3_jy7pm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1109322559]
+visible = false
+polygon = PackedVector2Array(-16, -2, -16, -8, -10, -11, -10, -15, -5, -17, -5, -31, -10, -34, -10, -39, -7, -44, -5, -45, -6, -50, -4, -53, -1, -55, 2, -55, 6, -52, 6, -47, 4, -45, 9, -42, 10, -37, 10, -33, 6, -30, 6, -16, 10, -15, 10, -12, 14, -12, 16, -10, 16, -3, 16, 1, 1, 8, -11, 3, -16, 1)
