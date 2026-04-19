@@ -5,6 +5,7 @@
 [ext_resource type="TileSet" uid="uid://b0ciiar6k1gua" path="res://assets/prototype/isometric_tile_set.tres" id="3_ts4ud"]
 [ext_resource type="Script" uid="uid://bvcqmw84luhvx" path="res://scenes/glow_overlay.gd" id="4_ep22m"]
 [ext_resource type="PackedScene" uid="uid://dh1sknka87ugd" path="res://scenes/drawer.tscn" id="4_jd1fy"]
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://UI/theme.tres" id="6_ts4ud"]
 
 [node name="LevelBase" type="Node2D" unique_id=196843778]
 script = ExtResource("1_da5si")
@@ -37,14 +38,17 @@ anchor_right = 1.0
 offset_left = -86.0
 offset_bottom = 31.0
 grow_horizontal = 0
+theme = ExtResource("6_ts4ud")
 text = "Quit Level"
 
 [node name="QuitConfirm" type="ConfirmationDialog" parent="UI" unique_id=16154603]
+theme = ExtResource("6_ts4ud")
 ok_button_text = "Confirm Quit Level"
 cancel_button_text = "Keep Playing Level"
 
 [node name="WinDialog" type="ConfirmationDialog" parent="UI" unique_id=1360606412]
 title = "Target Reached"
+theme = ExtResource("6_ts4ud")
 ok_button_text = "Return to Level Selection"
 dialog_text = "Integrity remaining: xxx"
 cancel_button_text = "Keep Playing"
@@ -54,6 +58,7 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = 60.0
 offset_bottom = 43.0
+theme = ExtResource("6_ts4ud")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2

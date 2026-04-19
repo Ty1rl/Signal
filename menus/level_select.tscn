@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d0h7726xfwl3s"]
 
+[ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://UI/theme.tres" id="1_a00cd"]
 [ext_resource type="Script" uid="uid://cowme1fj71li4" path="res://menus/level_select.gd" id="1_x5a0v"]
 
 [node name="LevelSelect" type="Control" unique_id=782599961]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_a00cd")
 script = ExtResource("1_x5a0v")
 
 [node name="Center" type="CenterContainer" parent="." unique_id=791564552]
