@@ -28,7 +28,7 @@ func _ready() -> void:
 		"Skip": skip_button.get_theme_stylebox("normal").duplicate(),
 	}
 	# Selected styles are auth'd by the tscn sub_resources; load them by name
-	var scene := load("res://scenes/drawer.tscn")
+	var _scene := load("res://scenes/drawer.tscn")
 	# Simpler: build selected styles programmatically
 	for shape in ["Wide", "Pulse", "Skip"]:
 		var style: StyleBoxFlat = _normal_styles[shape].duplicate()

@@ -1,7 +1,7 @@
 class_name Tile
 extends Area2D
 
-signal clicked(tile_coord: Vector2i)
+#signal clicked(tile_coord: Vector2i)
 
 enum Terrain { PLAIN, FOREST, WALL }
 enum TowerRole { NONE, NORMAL, SOURCE, TARGET }

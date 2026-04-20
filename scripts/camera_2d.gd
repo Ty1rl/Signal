@@ -17,7 +17,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion and dragging:
 		position -= event.relative / zoom.x
 
-func _zoom_at(screen_pos: Vector2, factor: float) -> void:
+func _zoom_at(_screen_pos: Vector2, factor: float) -> void:
 	var world_before: Vector2 = get_global_mouse_position()
 	zoom = (zoom * factor).clamp(Vector2(ZOOM_MIN, ZOOM_MIN), Vector2(ZOOM_MAX, ZOOM_MAX))
 	var world_after: Vector2 = get_global_mouse_position()

@@ -100,6 +100,7 @@ offset_right = 1132.0
 offset_bottom = 628.0
 
 [node name="HintLabel" type="Label" parent="UI/HintPanel" unique_id=1490088560]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
