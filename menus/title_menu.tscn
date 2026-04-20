@@ -19,7 +19,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.90051556, 0.43495622, 0.24097028, 1)
 theme_override_font_sizes/font_size = 48
-text = "Signal"
+text = "S i g n a l"
 horizontal_alignment = 1
 
 [node name="BottonVBox" type="VBoxContainer" parent="TitleVBox" unique_id=578063431]
