@@ -2,6 +2,18 @@
 
 [ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://assets/ui/theme.tres" id="1_a00cd"]
 [ext_resource type="Script" uid="uid://cowme1fj71li4" path="res://menus/level_select.gd" id="1_x5a0v"]
+[ext_resource type="Shader" uid="uid://c3cdq37ua7yv7" path="res://assets/stars.gdshader" id="3_ihgok"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_an5vc"]
+shader = ExtResource("3_ihgok")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
 
 [node name="LevelSelect" type="Control" unique_id=782599961]
 layout_mode = 3
@@ -20,6 +32,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Center" unique_id=1843167613]
+material = SubResource("ShaderMaterial_an5vc")
+custom_minimum_size = Vector2(8000, 4000)
+layout_mode = 2
 
 [node name="Buttons" type="VBoxContainer" parent="Center" unique_id=90286550]
 layout_mode = 2
