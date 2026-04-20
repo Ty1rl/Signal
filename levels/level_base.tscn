@@ -94,14 +94,18 @@ theme_override_font_sizes/font_size = 24
 text = "Integrity: 100"
 
 [node name="HintPanel" type="PanelContainer" parent="UI" unique_id=1377365368]
-offset_left = 20.0
-offset_top = 560.0
-offset_right = 1132.0
-offset_bottom = 628.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="HintLabel" type="Label" parent="UI/HintPanel" unique_id=1490088560]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 autowrap_mode = 3
