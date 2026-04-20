@@ -13,6 +13,8 @@ config_version=5
 config/name="Signal"
 run/main_scene="uid://myoaumll50fl"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://dikd5x2pfqyur"
 config/icon="res://icon.svg"
 
 [autoload]
