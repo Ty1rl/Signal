@@ -109,13 +109,20 @@ func _pick_region() -> Rect2:
 
 func _compute_tint() -> Color:
 	if tower_role == TowerRole.NONE:
-		return Color.WHITE
+		# Terrain tint
+		match terrain:
+			Terrain.FOREST: return Color(0.75, 0.95, 0.80)  # soft green
+			Terrain.WALL:   return Color(0.70, 0.75, 0.85)  # cool slate
+			_:               return Color(0.95, 0.97, 1.00)  # pale white-blue
+	
+	# Tower states
 	if has_state(State.SELECTED):
 		return Color(1.8, 1.8, 0.6)
 	if tower_role == TowerRole.TARGET and not has_state(State.REACHABLE):
 		return Color(0.5, 0.2, 0.5)
 	if not has_state(State.REACHABLE):
-		return Color(0.4, 0.4, 0.4)
+		# OFF tower: warm amber so it distinguishes from dark terrain
+		return Color(0.85, 0.70, 0.40)
 	if has_state(State.BROADCASTING):
 		match tower_shape:
 			"Wide":  return Color(0.6, 1.8, 0.8)

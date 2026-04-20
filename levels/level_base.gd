@@ -5,8 +5,8 @@ const TILE_SCENE := preload("res://scenes/tile.tscn")
 const TILE_SIZE := Vector2i(32, 16)
 
 const SHAPES: Dictionary = {
-	"Wide":  {"range": 3, "cost": 10, "passes": ["plain", "forest"]},
-	"Pulse": {"range": 5, "cost": 15, "passes": ["plain"]},
+	"Wide":  {"range": 3, "cost": 15, "passes": ["plain"]},
+	"Pulse": {"range": 5, "cost": 10, "passes": ["plain", "forest"]},
 	"Skip":  {"range": 2, "cost": 25, "passes": ["plain", "forest", "wall"]},
 }
 
@@ -15,6 +15,10 @@ const SHAPE_COLORS: Dictionary = {
 	"Pulse": Color(0.3, 0.6, 1.0, 0.4),
 	"Skip":  Color(1.0, 0.5, 0.2, 0.4),
 }
+var hint_text: String = ""
+
+@onready var hint_panel: PanelContainer = $UI/HintPanel
+@onready var hint_label: Label = $UI/HintPanel/HintLabel
 
 @onready var terrain_grid_node: Node2D = $TerrainGrid
 @onready var drawer: PanelContainer = $UI/Drawer
@@ -55,6 +59,12 @@ func _ready() -> void:
 	_recompute_control()
 	_refresh_all_tiles()
 	_update_integrity_label()
+	
+	if hint_text != "":
+		hint_label.text = hint_text
+		hint_panel.show()
+	else:
+		hint_panel.hide()	
 
 func tile_to_local(tile: Vector2i) -> Vector2:
 	var hw: float = TILE_SIZE.x * 0.5
@@ -117,7 +127,21 @@ func _recompute_control() -> void:
 			if controlled_tiles.size() > before_size:
 				changed = true
 
+func _mark_controlled(pos: Vector2i, shape_name: String) -> void:
+	controlled_tiles[pos] = true
+	if not controlled_tile_shapes.has(pos):
+		controlled_tile_shapes[pos] = []
+	if shape_name not in controlled_tile_shapes[pos]:
+		controlled_tile_shapes[pos].append(shape_name)
+						
 func _flood_from(origin: Vector2i, shape_name: String) -> void:
+	if shape_name == "Pulse":
+		_pulse_from(origin)
+		return
+	# Wide and Skip: radial flood
+	_radial_flood_from(origin, shape_name)
+
+func _radial_flood_from(origin: Vector2i, shape_name: String) -> void:
 	var shape: Dictionary = SHAPES[shape_name]
 	var max_range: int = shape["range"]
 	var passes: Array = shape["passes"]
@@ -147,6 +171,34 @@ func _flood_from(origin: Vector2i, shape_name: String) -> void:
 				visited[nb] = d + 1
 				queue.append(nb)
 
+func _pulse_from(origin: Vector2i) -> void:
+	var shape: Dictionary = SHAPES["Pulse"]
+	var max_range: int = shape["range"]
+	var passes: Array = shape["passes"]
+	
+	_mark_controlled(origin, "Pulse")
+	
+	var directions: Array = [
+		Vector2i(1, 0),
+		Vector2i(-1, 0),
+		Vector2i(0, 1),
+		Vector2i(0, -1),
+	]
+	for dir in directions:
+		for step in range(1, max_range + 1):
+			var pos: Vector2i = origin + dir * step
+			if not terrain_grid.has(pos):
+				break
+			var terrain: String = _tile_terrain(pos)
+			if terrain not in passes:
+				break
+			# Mark this tile controlled (beam passes through)
+			_mark_controlled(pos, "Pulse")
+			# If a tower sits here, beam terminates
+			var tile: Tile = terrain_grid[pos]
+			if tile.tower_role != Tile.TowerRole.NONE:
+				break
+				
 func _refresh_all_tiles() -> void:
 	for coord in terrain_grid.keys():
 		var tile: Tile = terrain_grid[coord]
@@ -171,7 +223,7 @@ func _update_integrity_label() -> void:
 	if current_integrity < 0:
 		integrity_label.add_theme_color_override("font_color", Color.RED)
 	else:
-		integrity_label.remove_theme_color_override("font_color")
+		integrity_label.remove_theme_color_override("font_color")		
 
 func _on_tile_clicked(coord: Vector2i) -> void:
 	if not terrain_grid.has(coord):
@@ -305,7 +357,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		
 		var picked := _pick_tile_at(event.position)
-		print("CLICK at ", event.position, " picked=", picked)
+		# print("CLICK at ", event.position, " picked=", picked)
 		if picked != Vector2i(-1, -1):
 			_on_tile_clicked(picked)
 			return

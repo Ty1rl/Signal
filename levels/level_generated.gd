@@ -1,13 +1,17 @@
 extends LevelBase
 
-const LEVEL_PATH: String = "res://level_data/level_01_seed_10.json"
+#const LEVEL_PATH: String = "res://level_data/level_01_seed_10.json"
+var level_path: String = ""
 
 var level_data: Dictionary = {}
 var tower_id_to_index: Dictionary = {}
 var edge_lookup: Dictionary = {}
 
 func _ready() -> void:
-	level_data = LevelLoader.load_level(LEVEL_PATH)
+	level_path = Globals.current_level_path
+	if level_path == "":
+		level_path = "res://level_data/level_arc.json"  # fallback
+	level_data = LevelLoader.load_level(level_path)
 	if level_data.is_empty():
 		push_error("Level data empty; aborting.")
 		return
@@ -34,6 +38,7 @@ func _ready() -> void:
 	current_integrity = starting_integrity
 	
 	# Build grid, set tower roles, do all game setup
+	hint_text = level_data.get("hint_text", "")
 	super._ready()
 	
 	# Now override terrain for non-plain tiles from JSON

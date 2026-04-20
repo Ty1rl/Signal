@@ -10,7 +10,18 @@
 background_mode = 3
 glow_enabled = true
 glow_intensity = 1.0
-glow_bloom = 1.0
+glow_bloom = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_da5si"]
+shader = ExtResource("5_ep22m")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_da5si"]
 shader = ExtResource("5_ep22m")
@@ -91,3 +102,15 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 24
 text = "Integrity: 100"
+
+[node name="HintPanel" type="PanelContainer" parent="UI" unique_id=1377365368]
+offset_left = 20.0
+offset_top = 560.0
+offset_right = 1132.0
+offset_bottom = 628.0
+
+[node name="HintLabel" type="Label" parent="UI/HintPanel" unique_id=1490088560]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+autowrap_mode = 3

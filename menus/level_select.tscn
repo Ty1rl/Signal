@@ -29,10 +29,6 @@ theme_override_constants/separation = 12
 layout_mode = 2
 text = "Select Level"
 
-[node name="Level01Button" type="Button" parent="Center/Buttons" unique_id=1107222438]
-layout_mode = 2
-text = "Level 1"
-
 [node name="BackButton" type="Button" parent="Center/Buttons" unique_id=1967255478]
 layout_mode = 2
 text = "Back"
