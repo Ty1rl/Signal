@@ -20,6 +20,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"
 
+[node name="FullscreenButton" type="CheckButton" parent="VBoxContainer" unique_id=1672545370]
+layout_mode = 2
+text = "Fullscreen"
+
 [node name="VolumeHBox" type="HBoxContainer" parent="VBoxContainer" unique_id=60404414]
 layout_mode = 2
 
@@ -38,4 +42,5 @@ max_value = 1.0
 step = 0.1
 value = 0.5
 
+[connection signal="toggled" from="VBoxContainer/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
 [connection signal="value_changed" from="VBoxContainer/VolumeHBox/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
