@@ -1,0 +1,76 @@
+{
+  "label": "tutorial_2_pulse",
+  "grid_w": 7,
+  "grid_h": 7,
+  "budget": 50,
+  "towers": [
+    {
+      "id": "Source",
+      "x": 0,
+      "y": 4,
+      "is_source": true,
+      "is_target": false,
+      "is_scenery": false,
+      "is_trap": false
+    },
+    {
+      "id": "Target",
+      "x": 0,
+      "y": 0,
+      "is_source": false,
+      "is_target": true,
+      "is_scenery": false,
+      "is_trap": false
+    }
+  ],
+  "tiles": [
+    {
+      "x": 0,
+      "y": 2,
+      "terrain": "forest"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "terrain": "forest"
+    }
+  ],
+  "shapes": {
+    "Wide": {
+      "range": 3,
+      "cost": 15,
+      "passes": [
+        "plain"
+      ]
+    },
+    "Pulse": {
+      "range": 5,
+      "cost": 10,
+      "passes": [
+        "forest",
+        "plain"
+      ]
+    },
+    "Skip": {
+      "range": 2,
+      "cost": 25,
+      "passes": [
+        "forest",
+        "plain",
+        "wall"
+      ]
+    }
+  },
+  "status": "GOOD",
+  "intended_cost": 10,
+  "intended_sequence": [
+    {
+      "pos": [
+        0,
+        4
+      ],
+      "shape": "Pulse"
+    }
+  ],
+  "hint_text": "Pulse propagates in four straight directions and passes through small rocks. Activate the source with Pulse to cut through the rocks to the target."
+}

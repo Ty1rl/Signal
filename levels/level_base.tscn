@@ -4,16 +4,46 @@
 [ext_resource type="Script" uid="uid://d1vhl1h1lt3yl" path="res://scripts/camera_2d.gd" id="2_cam"]
 [ext_resource type="PackedScene" uid="uid://dh1sknka87ugd" path="res://scenes/drawer.tscn" id="3_drawer"]
 [ext_resource type="Theme" uid="uid://bxe3oepesv06h" path="res://assets/ui/theme.tres" id="4_theme"]
+[ext_resource type="Shader" uid="uid://c3cdq37ua7yv7" path="res://assets/stars.gdshader" id="5_ep22m"]
 
 [sub_resource type="Environment" id="Environment_da5si"]
 background_mode = 3
 glow_enabled = true
 glow_intensity = 1.0
-glow_bloom = 1.0
+glow_bloom = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_da5si"]
+shader = ExtResource("5_ep22m")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
 
 [node name="LevelBase" type="Node2D" unique_id=836221922]
 y_sort_enabled = true
 script = ExtResource("1_base")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=517772981]
+environment = SubResource("Environment_da5si")
+
+[node name="Background" type="ColorRect" parent="." unique_id=122182962]
+material = SubResource("ShaderMaterial_da5si")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4000.0
+offset_top = -2000.0
+offset_right = 4000.0
+offset_bottom = 2000.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1705684684]
 position = Vector2(0, 60)
@@ -62,5 +92,14 @@ theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 24
 text = "Integrity: 100"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=517772981]
-environment = SubResource("Environment_da5si")
+[node name="HintPanel" type="PanelContainer" parent="UI" unique_id=1377365368]
+offset_left = 20.0
+offset_top = 560.0
+offset_right = 1132.0
+offset_bottom = 628.0
+
+[node name="HintLabel" type="Label" parent="UI/HintPanel" unique_id=1490088560]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+autowrap_mode = 3

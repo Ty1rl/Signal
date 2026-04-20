@@ -97,7 +97,7 @@ horizontal_alignment = 1
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 12
-text = "10"
+text = "15"
 horizontal_alignment = 1
 
 [node name="PulseButton" type="Button" parent="Buttons"]
@@ -129,7 +129,7 @@ horizontal_alignment = 1
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 12
-text = "15"
+text = "10"
 horizontal_alignment = 1
 
 [node name="SkipButton" type="Button" parent="Buttons"]

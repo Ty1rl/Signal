@@ -1,0 +1,92 @@
+{
+  "label": "tutorial_4_chain",
+  "grid_w": 5,
+  "grid_h": 5,
+  "budget": 50,
+  "towers": [
+    {
+      "id": "Source",
+      "x": 0,
+      "y": 2,
+      "is_source": true,
+      "is_target": false,
+      "is_scenery": false,
+      "is_trap": false
+    },
+    {
+      "id": "T1",
+      "x": 2,
+      "y": 2,
+      "is_source": false,
+      "is_target": false,
+      "is_scenery": false,
+      "is_trap": false
+    },
+    {
+      "id": "Target",
+      "x": 4,
+      "y": 2,
+      "is_source": false,
+      "is_target": true,
+      "is_scenery": false,
+      "is_trap": false
+    }
+  ],
+  "tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "terrain": "wall"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "terrain": "wall"
+    }
+  ],
+  "shapes": {
+    "Wide": {
+      "range": 3,
+      "cost": 15,
+      "passes": [
+        "plain"
+      ]
+    },
+    "Pulse": {
+      "range": 5,
+      "cost": 10,
+      "passes": [
+        "forest",
+        "plain"
+      ]
+    },
+    "Skip": {
+      "range": 2,
+      "cost": 25,
+      "passes": [
+        "forest",
+        "plain",
+        "wall"
+      ]
+    }
+  },
+  "status": "GOOD",
+  "intended_cost": 20,
+  "intended_sequence": [
+    {
+      "pos": [
+        0,
+        2
+      ],
+      "shape": "Pulse"
+    },
+    {
+      "pos": [
+        2,
+        2
+      ],
+      "shape": "Pulse"
+    }
+  ],
+  "hint_text": "Transmit the signal from the green tower to the purple tower. Click a tower to activate it with a waveform. Activated towers glow and re-propagate the signal. Each waveform loses integrity differently as it propagates. A single waveform can only reach so far. Activate a relay tower to re-propagate the signal further toward the target."
+}
